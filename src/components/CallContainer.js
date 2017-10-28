@@ -5,11 +5,19 @@ import update from 'immutability-helper';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
+import { CircularProgress } from 'material-ui/Progress';
 import VideoControls from './VideoControls';
 import Dialer from './Dialer';
 import Video from './Video';
+import IncomingToast from './IncomingToast';
+import Grid from 'material-ui/Grid';
 
 const styles = theme => ({
+  container: {
+    flexGrow: 1,
+    marginTop: 30,
+    textAlign: 'center',
+  },
   root: theme.mixins.gutters({
     paddingTop: 16,
     paddingBottom: 16,
@@ -24,6 +32,7 @@ class CallContainer extends Component {
     super(props);
     this.call = {};
     this.state = {
+      loading: false,
       incomingCall: false,
       callString: '',
       callActive: false,
@@ -47,7 +56,7 @@ class CallContainer extends Component {
 
     if (nextProps.store.authenticated) {
       this.props.store.api.phone.on('call:incoming', (call) => {
-        this.setState({ incomingCall: true })
+        this.setState(state => ({ incomingCall: true }));
         this.call = call;
         // Set up listeners to update the UI if the callee chooses to answer the call.
         call.on('remoteMediaStream:change', () => {
@@ -100,10 +109,12 @@ class CallContainer extends Component {
   }
 
   handleAccept = e => {
-    // Answer the call
+    this.setState(state => ({incomingCall: false}));
     this.call.answer();
   }
+  
   handleIgnore = e => {
+    this.setState(state => ({incomingCall: false}));
     this.call.reject();
   }
 
@@ -111,13 +122,15 @@ class CallContainer extends Component {
     let incomingVideo = this.incomingVideo;
     let outgoingVideo = this.outgoingVideo;
     this.call = this.props.store.api.phone.dial(callString);
-    this.setState({ callActive: true });
+    this.setState(state => ({ loading: true }));
     this.call.on('active', () => {
       console.log('Call Active');
+      this.setState(state => ({ loading: false, callActive: true }));
     });
     this.call.on('remoteMediaStream:change', () => {
       console.log('Connected! ')
       incomingVideo.srcObject = this.call.remoteMediaStream;
+      this.setState(state => ({ loading: false, callActive: true }));
     });
     this.call.on('localMediaStream:change', () => {
       outgoingVideo.srcObject = this.call.localMediaStream;
@@ -128,20 +141,25 @@ class CallContainer extends Component {
 
   render() {
     const { classes } = this.props;
+    const { loading, callActive, incomingCall } = this.state;
     return (
       <div>
-        <Dialer onDial={this.placeCall} />
-        <Paper className={classes.root} elevation={4}>
-          <Typography type="headline" component="h3">
-            Video Container
+        {loading && <CircularProgress className={classes.progress} size={50} />}
+        {!callActive && !loading && <Dialer onDial={this.placeCall} />}
+        <IncomingToast open={incomingCall} onAnswer={this.handleAccept} onIgnore={this.handleIgnore} />
+        <Grid item xs={12}>
+          <Paper className={classes.root} elevation={4}>
+            <Typography type="headline" component="h4">
+              Spark Video Call
         </Typography>
-          <Video incoming={this.incomingVideoInput} outgoing={this.outgoingVideoInput} />
-          <VideoControls onAudioMute={this.handleMute} 
-          onVideoMute={this.handleVideoMute} 
-          onEnd={this.handleHangUp}
-          videoMuted={this.state.callState.videoMuted}
-          audioMuted={this.state.callState.audioMuted} />
-        </Paper>
+            <Video incoming={this.incomingVideoInput} outgoing={this.outgoingVideoInput} />
+            <VideoControls onAudioMute={this.handleMute}
+              onVideoMute={this.handleVideoMute}
+              onEnd={this.handleHangUp}
+              videoMuted={this.state.callState.videoMuted}
+              audioMuted={this.state.callState.audioMuted} />
+          </Paper>
+        </Grid>
       </div>
     );
   }

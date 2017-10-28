@@ -11,12 +11,10 @@ const theme = createMuiTheme();
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
-        <MuiThemeProvider theme={theme}>
-          <DevTools />
-          <SparkApp />
-        </MuiThemeProvider>
-      </BrowserRouter>
+      <div>
+        <DevTools />
+        <SparkApp />
+      </div>
     );
   }
 }
@@ -24,7 +22,11 @@ class App extends Component {
 const AppContainer = () => {
   return (
     <Provider store={new Store()}>
-      <App />
+      <MuiThemeProvider theme={theme}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </MuiThemeProvider>
     </Provider>
   );
 };

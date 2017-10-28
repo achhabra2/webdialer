@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
+import Grid from 'material-ui/Grid';
 
 export default class componentName extends PureComponent {
   static propTypes = {
@@ -27,18 +28,19 @@ export default class componentName extends PureComponent {
 
   render() {
     return (
-      <div>
+      <Grid item xs={12}>
         <TextField
           required
           id="required"
           label="Enter Address"
           margin="normal"
+          fullWidth={true}
           onChange={this.handleChange('callString')}
         />
         <Button color='primary' raised onClick={this.handleDial}>
           Place Call
         </Button>
-      </div>
+      </Grid>
     )
   }
 }

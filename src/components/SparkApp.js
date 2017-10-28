@@ -6,11 +6,13 @@ import CallContainer from './CallContainer';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import { Route } from 'react-router-dom';
+import { inject, observer } from 'mobx-react';
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
     marginTop: 30,
+    textAlign: 'center',
   },
   paper: {
     padding: 16,
@@ -19,23 +21,24 @@ const styles = theme => ({
   },
 });
 
+@inject('store') @observer
 class SparkApp extends Component {
   static propTypes = {
-    prop: PropTypes
   }
 
   render() {
-    const {classes} = this.props;
+    const { classes, store } = this.props;
     return (
       <div className={classes.root}>
         <Navbar />
-        <Grid container spacing={24}>
-          <Grid item xs={12}>
-            <Authenticate />
-          </Grid>
-          <Grid item xs={12}>
-            <CallContainer />
-          </Grid>
+        <Grid container
+          spacing={24}
+          alignItems='center'
+          justify='center'>
+          {!store.authenticated &&
+            <Authenticate />}
+          {store.authenticated &&
+            <CallContainer />}
         </Grid>
       </div>
     )
