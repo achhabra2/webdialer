@@ -43,18 +43,14 @@ class CallContainer extends Component {
     }
   }
 
-  componentWillMount() {
-    if (this.props.store.authenticated) {
-      this.props.store.api.phone.register();
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('Will receive props..');
+  componentDidMount() {
+    console.log('Component will mount');
+    console.log(this.props.store.authenticated);
     let incomingVideo = this.incomingVideo;
     let outgoingVideo = this.outgoingVideo;
 
-    if (nextProps.store.authenticated) {
+    if (this.props.store.authenticated) {
+      this.props.store.api.phone.register();
       this.props.store.api.phone.on('call:incoming', (call) => {
         this.setState(state => ({ incomingCall: true }));
         this.call = call;
@@ -72,6 +68,33 @@ class CallContainer extends Component {
         call.acknowledge();
       });
     }
+    
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('Will receive props..');
+    // let incomingVideo = this.incomingVideo;
+    // let outgoingVideo = this.outgoingVideo;
+
+    // if (nextProps.store.authenticated) {
+    //   this.props.store.api.phone.register();
+    //   this.props.store.api.phone.on('call:incoming', (call) => {
+    //     this.setState(state => ({ incomingCall: true }));
+    //     this.call = call;
+    //     // Set up listeners to update the UI if the callee chooses to answer the call.
+    //     call.on('remoteMediaStream:change', () => {
+    //       incomingVideo.srcObject = call.remoteMediaStream;
+    //     });
+    //     call.on('localMediaStream:change', () => {
+    //       outgoingVideo.srcObject = call.localMediaStream;
+    //       // Mute the local video so you don't hear yourself speaking
+    //       outgoingVideo.muted = true;
+    //     });
+
+    //     // Let the caller know that you've indicated to the callee that there's an incoming call
+    //     call.acknowledge();
+    //   });
+    // }
   }
 
   incomingVideoInput = input => {
@@ -112,7 +135,7 @@ class CallContainer extends Component {
     this.setState(state => ({incomingCall: false}));
     this.call.answer();
   }
-  
+
   handleIgnore = e => {
     this.setState(state => ({incomingCall: false}));
     this.call.reject();

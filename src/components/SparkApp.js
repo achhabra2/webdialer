@@ -11,7 +11,6 @@ import { inject, observer } from 'mobx-react';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    marginTop: 30,
     textAlign: 'center',
   },
   paper: {
