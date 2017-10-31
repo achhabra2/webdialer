@@ -2,11 +2,12 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-import Grid from 'material-ui/Grid';
+import {Container, Item} from './FlexComponents';
 
 export default class componentName extends PureComponent {
   static propTypes = {
-    onDial: PropTypes.func
+    onDial: PropTypes.func,
+    className: PropTypes.string,
   }
 
   constructor(props) {
@@ -28,7 +29,7 @@ export default class componentName extends PureComponent {
 
   render() {
     return (
-      <Grid item xs={12}>
+      <div className={this.props.className}>
         <TextField
           required
           id="required"
@@ -40,7 +41,7 @@ export default class componentName extends PureComponent {
         <Button color='primary' raised onClick={this.handleDial}>
           Place Call
         </Button>
-      </Grid>
+      </div>
     )
   }
 }

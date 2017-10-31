@@ -1,36 +1,49 @@
 import React, { Component } from 'react';
+import injectSheet from 'react-jss';
+import background from './background.jpg';
 
-const containerStyle = {
-  'border': '1px solid black',
-  'display': 'inline-block',
-  'position': 'relative',
+const styles = {
+  containerStyle: {
+    'border': 'none',
+    'display': 'inline-block',
+    'position': 'relative',
+    '&:hover $controlsStyle': {
+      opacity: '1',
+    }
+  },
+  videoStyle: {
+    width: '100%',
+  },
+  overlayStyle: {
+    'position': 'absolute',
+    'right': '0px',
+    'top': '0px',
+    'margin': '10px',
+    'padding': '5px 5px',
+    height: '20%',
+  },
+  controlsStyle: {
+    position: 'absolute',
+    bottom: '5px',
+    width: '100%',
+    textAlign: 'center',
+    margin: 'auto',
+    opacity: '0',
+    transition: '.5s ease',
+  },
 }
 
-const videoStyle = {
-  width: '800px',
-  height: '480px',
-}
-
-const overlayStyle = {
-  'position': 'absolute',
-  'right': '0px',
-  'top': '0px',
-  'margin': '10px',
-  'padding': '5px 5px',
-  'font-size': '20px',
-  'font-family': 'Helvetica',
-  width: '150px',
-  height: '150px',
-};
-
-export default class Video extends Component {
+class Video extends Component {
   render() {
-    const { incoming, outgoing } = this.props;
+    const { incoming, outgoing, classes } = this.props;
     return (
-      <div style={containerStyle}>
-        <video style={videoStyle} autoPlay ref={incoming}></video>
-        <video style={overlayStyle} autoPlay ref={outgoing}></video>
+      <div className={classes.containerStyle}>
+        <video className={classes.videoStyle} autoPlay allowFullScreen ref={incoming} poster={background}></video>
+        <video className={classes.overlayStyle} autoPlay ref={outgoing}></video>
+        <div className={classes.controlsStyle}>{this.props.children}</div>
       </div>
     )
   }
 }
+
+export default injectSheet(styles)(Video);

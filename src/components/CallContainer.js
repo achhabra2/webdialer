@@ -10,7 +10,7 @@ import VideoControls from './VideoControls';
 import Dialer from './Dialer';
 import Video from './Video';
 import IncomingToast from './IncomingToast';
-import Grid from 'material-ui/Grid';
+import Draggable from 'react-draggable';
 
 const styles = theme => ({
   container: {
@@ -18,10 +18,19 @@ const styles = theme => ({
     marginTop: 30,
     textAlign: 'center',
   },
+  progress: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    textAlign: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    zIndex: 10
+    // verticalAlign: 'middle',
+  },
   root: theme.mixins.gutters({
-    paddingTop: 16,
-    paddingBottom: 16,
-    marginTop: theme.spacing.unit * 3,
+    paddingTop: 5,
+    paddingBottom: 5,
+    marginTop: theme.spacing.unit * 1,
   }),
 });
 
@@ -39,7 +48,8 @@ class CallContainer extends Component {
       callState: {
         audioMuted: false,
         videoMuted: false,
-      }
+      },
+      videoElement: null,
     }
   }
 
@@ -68,39 +78,14 @@ class CallContainer extends Component {
         call.acknowledge();
       });
     }
-    
-  }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('Will receive props..');
-    // let incomingVideo = this.incomingVideo;
-    // let outgoingVideo = this.outgoingVideo;
-
-    // if (nextProps.store.authenticated) {
-    //   this.props.store.api.phone.register();
-    //   this.props.store.api.phone.on('call:incoming', (call) => {
-    //     this.setState(state => ({ incomingCall: true }));
-    //     this.call = call;
-    //     // Set up listeners to update the UI if the callee chooses to answer the call.
-    //     call.on('remoteMediaStream:change', () => {
-    //       incomingVideo.srcObject = call.remoteMediaStream;
-    //     });
-    //     call.on('localMediaStream:change', () => {
-    //       outgoingVideo.srcObject = call.localMediaStream;
-    //       // Mute the local video so you don't hear yourself speaking
-    //       outgoingVideo.muted = true;
-    //     });
-
-    //     // Let the caller know that you've indicated to the callee that there's an incoming call
-    //     call.acknowledge();
-    //   });
-    // }
   }
 
   incomingVideoInput = input => {
     console.log('Incoming Video Input:');
     console.log(input);
     this.incomingVideo = input;
+    this.setState({ videoElement: input });
   }
 
   outgoingVideoInput = input => {
@@ -132,12 +117,12 @@ class CallContainer extends Component {
   }
 
   handleAccept = e => {
-    this.setState(state => ({incomingCall: false}));
+    this.setState(state => ({ incomingCall: false }));
     this.call.answer();
   }
 
   handleIgnore = e => {
-    this.setState(state => ({incomingCall: false}));
+    this.setState(state => ({ incomingCall: false }));
     this.call.reject();
   }
 
@@ -166,23 +151,25 @@ class CallContainer extends Component {
     const { classes } = this.props;
     const { loading, callActive, incomingCall } = this.state;
     return (
-      <div>
-        {loading && <CircularProgress className={classes.progress} size={50} />}
+      <div className={this.props.className}>
+        {loading && <div className={classes.progress}> <CircularProgress size={50} /> </div>}
         {!callActive && !loading && <Dialer onDial={this.placeCall} />}
         <IncomingToast open={incomingCall} onAnswer={this.handleAccept} onIgnore={this.handleIgnore} />
-        <Grid item xs={12}>
+        <Draggable>
           <Paper className={classes.root} elevation={4}>
-            <Typography type="headline" component="h4">
+            {/* <Typography type="headline" component="h4">
               Spark Video Call
-        </Typography>
-            <Video incoming={this.incomingVideoInput} outgoing={this.outgoingVideoInput} />
-            <VideoControls onAudioMute={this.handleMute}
-              onVideoMute={this.handleVideoMute}
-              onEnd={this.handleHangUp}
-              videoMuted={this.state.callState.videoMuted}
-              audioMuted={this.state.callState.audioMuted} />
+        </Typography> */}
+            <Video incoming={this.incomingVideoInput} outgoing={this.outgoingVideoInput}>
+              <VideoControls onAudioMute={this.handleMute}
+                onVideoMute={this.handleVideoMute}
+                onEnd={this.handleHangUp}
+                videoMuted={this.state.callState.videoMuted}
+                audioMuted={this.state.callState.audioMuted}
+                videoElement={this.state.videoElement} />
+            </Video>
           </Paper>
-        </Grid>
+        </Draggable>
       </div>
     );
   }

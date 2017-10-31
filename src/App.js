@@ -23,7 +23,7 @@ const AppContainer = () => {
   return (
     <Provider store={new Store()}>
       <MuiThemeProvider theme={theme}>
-        <BrowserRouter>
+        <BrowserRouter forceRefresh={false}>
           <App />
         </BrowserRouter>
       </MuiThemeProvider>
