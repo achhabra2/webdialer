@@ -81,6 +81,7 @@ class SubPage extends Component {
       url: this.state.baseUrl,
       retina: true,
       format: 'png',
+      full_page: true,
       width: w,
     };
     if (this.imgInput) {

@@ -5,7 +5,7 @@ import Button from 'material-ui/Button';
 import Switch from 'material-ui/Switch';
 import { FormControlLabel, FormGroup } from 'material-ui/Form';
 import { Container, Item } from './FlexComponents';
-import VideoCamIcon from 'material-ui-icons/VideocamOff';
+import VoiceChatIcon from 'material-ui-icons/VoiceChat';
 import Draggable from 'react-draggable';
 import IconButton from 'material-ui/IconButton';
 import DragHandle from 'material-ui-icons/DragHandle';
@@ -58,7 +58,7 @@ export default class Dialer extends PureComponent {
           <Button fab
             color="primary"
             aria-label="edit" onClick={this.handleDial} >
-            <VideoCamIcon />
+            <VoiceChatIcon />
           </Button>
         </Container>
       </Draggable>
