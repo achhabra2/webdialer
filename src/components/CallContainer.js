@@ -23,7 +23,7 @@ const styles = theme => ({
     width: '100%',
     height: '100%',
     textAlign: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.2)',
     zIndex: 10
     // verticalAlign: 'middle',
   },
@@ -32,6 +32,12 @@ const styles = theme => ({
     paddingBottom: 5,
     marginTop: theme.spacing.unit * 1,
   }),
+  hidden: {
+    visibility: 'hidden'
+  },
+  draggable: {
+    visibility: 'visible'
+  },
 });
 
 @inject('store') @observer
@@ -43,13 +49,14 @@ class CallContainer extends Component {
     this.state = {
       loading: false,
       incomingCall: false,
-      callString: '',
+      callString: this.props.callString || '',
       callActive: false,
       callState: {
         audioMuted: false,
         videoMuted: false,
       },
       videoElement: null,
+      mayday: this.props.mayday || false,
     }
   }
 
@@ -81,16 +88,16 @@ class CallContainer extends Component {
 
   }
 
+
   incomingVideoInput = input => {
-    console.log('Incoming Video Input:');
-    console.log(input);
     this.incomingVideo = input;
+  }
+
+  fullScreenInput = input => {
     this.setState({ videoElement: input });
   }
 
   outgoingVideoInput = input => {
-    console.log('Outgoing Video Input:');
-    console.log(input);
     this.outgoingVideo = input;
   }
 
@@ -149,27 +156,26 @@ class CallContainer extends Component {
 
   render() {
     const { classes } = this.props;
-    const { loading, callActive, incomingCall } = this.state;
+    const { loading, callActive, incomingCall, mayday, callString } = this.state;
     return (
-      <div className={this.props.className}>
-        {loading && <div className={classes.progress}> <CircularProgress size={50} /> </div>}
-        {!callActive && !loading && <Dialer onDial={this.placeCall} />}
+      <div className={this.props.className} style={this.props.style}>
+        {loading && <div className={classes.progress}> <CircularProgress size={80} color='accent' /> </div>}
+        {!callActive && !loading && <Dialer mayday={mayday} callString={callString} onDial={this.placeCall} />}
         <IncomingToast open={incomingCall} onAnswer={this.handleAccept} onIgnore={this.handleIgnore} />
-        <Draggable>
-          <Paper className={classes.root} elevation={4}>
-            {/* <Typography type="headline" component="h4">
-              Spark Video Call
-        </Typography> */}
-            <Video incoming={this.incomingVideoInput} outgoing={this.outgoingVideoInput}>
-              <VideoControls onAudioMute={this.handleMute}
-                onVideoMute={this.handleVideoMute}
-                onEnd={this.handleHangUp}
-                videoMuted={this.state.callState.videoMuted}
-                audioMuted={this.state.callState.audioMuted}
-                videoElement={this.state.videoElement} />
-            </Video>
-          </Paper>
-        </Draggable>
+        <div className={callActive? classes.draggable : classes.hidden }>
+          <Draggable>
+            <Paper className={classes.root} elevation={10}>
+              <Video incoming={this.incomingVideoInput} outgoing={this.outgoingVideoInput} fullScreen={this.fullScreenInput}>
+                <VideoControls onAudioMute={this.handleMute}
+                  onVideoMute={this.handleVideoMute}
+                  onEnd={this.handleHangUp}
+                  videoMuted={this.state.callState.videoMuted}
+                  audioMuted={this.state.callState.audioMuted}
+                  videoElement={this.state.videoElement} />
+              </Video>
+            </Paper>
+          </Draggable>
+        </div>
       </div>
     );
   }

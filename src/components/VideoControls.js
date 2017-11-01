@@ -32,11 +32,14 @@ class VideoControls extends PureComponent {
   handleToggle = (handler, event) => this.props[handler](event);
 
   handleFullScreen = (element, event) => {
-    console.log('Handle Fullscreen');
-    console.log(element);
+    // console.log('Handle Fullscreen');
+    // console.log(element);
     event.preventDefault();
-    if(element) {
-      GoInFullscreen(element)
+    if (element) {
+      if (IsFullScreenCurrently())
+        GoOutFullscreen()
+      else
+        GoInFullscreen(element)
     }
   };
 

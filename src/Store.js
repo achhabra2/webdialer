@@ -1,8 +1,8 @@
 import { observable, computed, action } from 'mobx';
-import Spark from 'ciscospark';
+// import Spark from 'ciscospark';
 
 class Store {
-  @observable api = Spark;
+//  @observable api = Spark;
   @observable authenticated = false;
 
   constructor() {

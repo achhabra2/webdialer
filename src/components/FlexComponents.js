@@ -5,7 +5,6 @@ class Container extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     style: PropTypes.object,
-    children: PropTypes.object,
   }
 
   render() {
@@ -30,7 +29,7 @@ class Container extends PureComponent {
     }
 
     return (
-      <ComponentProp style={merged} {...other}>
+      <ComponentProp style={merged} className={className} {...other}>
         {children}
       </ComponentProp>
     )
@@ -41,23 +40,39 @@ class Item extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     component: PropTypes.object,
-    children: PropTypes.object,
     flex: PropTypes.string,
     border: PropTypes.string,
     position: PropTypes.string,
     padding: PropTypes.string,
+    alignSelf: PropTypes.string,
   }
 
   render() {
-    const { className, component, padding, children, flex, border, position, ...other } = this.props;
+    const { 
+      style, 
+      className, 
+      component, 
+      padding, 
+      children, 
+      flex, 
+      border, 
+      position, 
+      alignSelf, 
+      textAlign,
+      ...other 
+    } = this.props;
 
-    const style = {
+    const template = {
       margin: 'auto',
       padding: padding || '5px',
-      flex: flex || '1 1 50%',
+      flex: flex || '0 1 auto',
       border: border || 'none',
       position: position || 'relative',
+      alignSelf: alignSelf || 'auto',
+      textAlign: textAlign || 'center',
     };
+
+    const merged = Object.assign({}, template, style);
 
     let ComponentProp = component;
 
@@ -66,7 +81,7 @@ class Item extends PureComponent {
     }
 
     return (
-      <ComponentProp style={style} {...other} >
+      <ComponentProp className={className} style={merged} {...other} >
         {children}
       </ComponentProp>
     )

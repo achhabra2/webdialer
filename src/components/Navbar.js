@@ -14,35 +14,30 @@ const styles = theme => ({
   },
 });
 
-class SimpleAppBar extends React.Component {
+class SimpleAppBar extends React.PureComponent {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 0
-    }
+  checkSelected = (text) => {
+    if(text) {
+      if(text === 'login' || text === 'call' || text === 'custom' || text === 'about')
+        return text;
+    } else return false;
   }
-
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
 
   render() {
     const { classes, authenticated } = this.props;
-    const { value } = this.state;
-
+    const path = this.props.location.pathname.replace(/^\//i, '');
     return (
       <div className={classes.root}>
         <AppBar position="static" color="primary">
           <Toolbar>
-            <Typography type="title" color="inherit">
+            <Typography align='center' type="title" color="inherit">
               Spark Web Dialer
           </Typography>
-            <Tabs centered value={value} onChange={this.handleChange}>
-              {!authenticated && <Tab label="Login" component={Link} to='/login' />}
-              <Tab label="Dialer" component={Link} to='/call' />
-              <Tab label="Custom Demo" component={Link} to='/custom' />
-              <Tab label="About" component={Link} to='/about' />
+            <Tabs scrollable={false} centered value={this.checkSelected(path)} fullWidth={true}>
+              {!authenticated && <Tab value='login' label="Login" component={Link} to='/login' />}
+              <Tab value='call' label="Dialer" component={Link} to='/call' />
+              <Tab value='custom' label="Custom Demo" component={Link} to='/custom' />
+              <Tab value='about' label="About" component={Link} to='/about' />
             </Tabs>
           </Toolbar>
         </AppBar>

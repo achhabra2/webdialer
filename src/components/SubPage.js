@@ -7,6 +7,8 @@ import CallContainer from './CallContainer';
 import Draggable from 'react-draggable';
 import { CircularProgress } from 'material-ui/Progress';
 import Urlbox from 'urlbox';
+import Controls from './Forms/CustomPage';
+import { Item } from './FlexComponents';
 
 // Plugin your API key and secret
 const urlbox = Urlbox('uyxmHTVQwumo6PKD', '3d74f6cee5b34eada3893332bd66579b');
@@ -24,7 +26,7 @@ const styles = theme => ({
   },
   formContainer: {
     margin: 'auto',
-    flex: '0 0 50%',
+    flex: '0 0 66%',
     padding: '5px',
   },
   button: {
@@ -47,14 +49,14 @@ const styles = theme => ({
     right: '0px',
     top: '0px',
     margin: '10px',
-    width: '25%',
+    // width: '25%',
   },
   progress: {
     position: 'absolute',
     width: '100%',
     height: '100%',
     textAlign: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.2)',
     // verticalAlign: 'middle',
   }
 });
@@ -65,9 +67,27 @@ class SubPage extends Component {
     super(props);
     this.state = {
       baseUrl: '',
-      loading: true,
+      loading: false,
+      config: false,
+      mayday: false,
+      callString: '',
+      callSize: '25%',
     };
   }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    const w = window.innerWidth * .9;
+    const options = {
+      url: this.state.baseUrl,
+      retina: true,
+      format: 'png',
+      width: w,
+    };
+    if (this.imgInput) {
+      this.imgInput.src = urlbox.buildUrl(options);
+    }
+  }
+
 
   handleChange = name => event => {
     this.setState({
@@ -88,37 +108,51 @@ class SubPage extends Component {
     this.imgInput.src = urlbox.buildUrl(options);
   };
 
+  handleSubmit = (config, event) => {
+    // Set your options
+    this.startLoading();
+    this.setState(state => ({
+      baseUrl: config.baseUrl,
+      callString: config.callString,
+      mayday: config.mayday,
+      callSize: config.callSize || '25%',
+      config: true,
+    }));
+  };
+
   stopLoading = () => this.setState(state => ({ loading: false }));
   startLoading = () => this.setState(state => ({ loading: true }));
 
   render() {
     const { classes } = this.props;
-    const { loading } = this.state;
+    const { mayday, callString, loading, config } = this.state;
     const ciscoImg = 'https://api.urlbox.io/v1/uyxmHTVQwumo6PKD/png?full_page=true&user_agent=desktop&url=https%3A%2F%2Fwww.cisco.com&retina=true&width=700';
 
     return (
       <div className={classes.root} >
-        <div className={classes.formContainer}>
-          <TextField
-            required
-            id="required"
-            label="Enter URL"
-            margin="normal"
-            fullWidth={true}
-            onChange={this.handleChange('baseUrl')}
-            className={classes.textField}
-          />
-          <Button color='primary' className={classes.button}
-            raised onClick={this.handlePage}>
-            Render Page
+        {!config && <Controls onSubmit={this.handleSubmit} />}
+        {config && (
+          <div class={classes.formContainer}>
+            <Item>
+              <Button color='primary' raised onClick={e => { this.setState({ config: false }) }}>
+                Back
         </Button>
-        </div>
-        <div className={classes.flexItem}>
-          {loading && <div className={classes.progress}> <CircularProgress size={50} /> </div>}
-          <img onLoad={this.stopLoading} alt='' src={ciscoImg} width='100%'
-            ref={(input) => { this.imgInput = input; }} />
-          <CallContainer className={classes.overlayStyle} />
-        </div>
+            </Item>
+          </div>
+        )}
+        {config && (
+          <div className={classes.flexItem}>
+            {loading && <div className={classes.progress}> <CircularProgress size={50} /> </div>}
+            <img onLoad={this.stopLoading} alt='' src={ciscoImg} width='100%'
+              ref={(input) => { this.imgInput = input; }} />
+            <CallContainer 
+              mayday={mayday} 
+              callString={callString} 
+              className={classes.overlayStyle} 
+              style={{width: this.state.callSize}}
+              />
+          </div>
+        )}
       </div>
     )
   }

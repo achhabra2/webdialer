@@ -35,9 +35,9 @@ const styles = {
 
 class Video extends Component {
   render() {
-    const { incoming, outgoing, classes } = this.props;
+    const { incoming, outgoing, classes, fullScreen } = this.props;
     return (
-      <div className={classes.containerStyle}>
+      <div className={classes.containerStyle} ref={fullScreen}>
         <video className={classes.videoStyle} autoPlay allowFullScreen ref={incoming} poster={background}></video>
         <video className={classes.overlayStyle} autoPlay ref={outgoing}></video>
         <div className={classes.controlsStyle}>{this.props.children}</div>
