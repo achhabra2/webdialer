@@ -4,9 +4,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import 'typeface-roboto'
 
 let public_address;
-process.env.NODE_ENV == 'production'? public_address = 'https://webdialer.chhab.rocks/' : public_address = 'http://localhost:3000/';
+process.env.NODE_ENV == 'production' ? public_address = 'https://webdialer.chhab.rocks/' : public_address = 'http://localhost:3000/';
 
 let redirectUri = '&redirect_uri=' + encodeURIComponent(public_address);
 
