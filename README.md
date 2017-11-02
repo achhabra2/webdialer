@@ -6,10 +6,12 @@ The Webdialer app is a Cisco Spark Video Client that is embedded into a web brow
 ***
 #### Capabilities
 1. Make Spark or SIP Video Call, with Full Screen, Mute Audio, Mute Video. 
-2. Enter branding URL and overlay Spark Video on top of any existing website (Demo purposes only). 
+2. Enter branding URL and overlay Spark Video on top of any existing website (Demo purposes only). The overlay option gives you the ability to have a draggable Mayday button as well. Please see the notes in Usage. 
 ***
 #### Usage
 The site is available at [here](https://webdialer.chhab.rocks). You will need to authorize an existing Cisco Spark account for it to work properly. From there you can go to either the ``Call`` tab or the ``Custom Page`` tab. The ``Call`` tab allows you to place a Spark call or a SIP Video Call. The ``Custom Page`` tab allows you to enter a branding URL to simulate video on a customer's webpage. 
+
+**IMPORTANT**: When you load a branding page it will take a minute or so, please be patient. Also if you choose the Mayday option - there is a drag handle to the left. Do not try to drag the Mayday button as you will end up making a call instead. Lastly - the Mayday button and video containers are separate elements, you must drag them around independently. 
 
 **Note**: This will require the ``Spark All`` permissions on your Cisco Spark account. This is because any embedded video client requires these full access permissions. 
 

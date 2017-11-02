@@ -9,6 +9,7 @@ import { CircularProgress } from 'material-ui/Progress';
 import Urlbox from 'urlbox';
 import Controls from './Forms/CustomPage';
 import { Item } from './FlexComponents';
+import Typography from 'material-ui/Typography';
 
 // Plugin your API key and secret
 const urlbox = Urlbox('uyxmHTVQwumo6PKD', '3d74f6cee5b34eada3893332bd66579b');
@@ -23,6 +24,7 @@ const styles = theme => ({
     alignItems: 'stretch',
     alignContent: 'stretch',
     height: '100%',
+    position: 'relative',
   },
   formContainer: {
     margin: 'auto',
@@ -42,6 +44,7 @@ const styles = theme => ({
     padding: '5px',
     flex: '1 1 90%',
     position: 'relative',
+    visibility: 'visible',
     border: '1px solid black',
   },
   overlayStyle: {
@@ -56,9 +59,20 @@ const styles = theme => ({
     width: '100%',
     height: '100%',
     textAlign: 'center',
-    backgroundColor: 'rgba(0,0,0,0.2)',
-    // verticalAlign: 'middle',
-  }
+    top: '80px',
+    zIndex: 10,
+  },
+  hidden: {
+    margin: 'auto',
+    padding: '5px',
+    flex: '1 1 90%',
+    position: 'relative',
+    visibility: 'hidden',
+    border: '1px solid black',
+  },
+  show: {
+    visibility: 'visible'
+  },
 });
 
 
@@ -102,7 +116,7 @@ class SubPage extends Component {
     const w = window.innerWidth * .9;
     const options = {
       url: this.state.baseUrl,
-      retina: true,
+      retina: false,
       format: 'png',
       width: w,
     };
@@ -131,6 +145,13 @@ class SubPage extends Component {
 
     return (
       <div className={classes.root} >
+        {loading && (
+          <div className={classes.progress}>
+            <CircularProgress size={100} />
+            <Typography type="subheading">
+              Be Patient this part takes a while...
+            </Typography>
+          </div>)}
         {!config && <Controls onSubmit={this.handleSubmit} />}
         {config && (
           <div class={classes.formContainer}>
@@ -142,16 +163,15 @@ class SubPage extends Component {
           </div>
         )}
         {config && (
-          <div className={classes.flexItem}>
-            {loading && <div className={classes.progress}> <CircularProgress size={50} /> </div>}
+          <div className={loading? classes.hidden : classes.flexItem }>
             <img onLoad={this.stopLoading} alt='' src={ciscoImg} width='100%'
               ref={(input) => { this.imgInput = input; }} />
-            <CallContainer 
-              mayday={mayday} 
-              callString={callString} 
-              className={classes.overlayStyle} 
-              style={{width: this.state.callSize}}
-              />
+            <CallContainer
+              mayday={mayday}
+              callString={callString}
+              className={classes.overlayStyle}
+              style={{ width: this.state.callSize }}
+            />
           </div>
         )}
       </div>
