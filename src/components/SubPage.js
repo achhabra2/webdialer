@@ -13,7 +13,7 @@ import Typography from 'material-ui/Typography';
 
 // Plugin your API key and secret
 const urlbox = Urlbox('uyxmHTVQwumo6PKD', '3d74f6cee5b34eada3893332bd66579b');
-
+const ciscoImg = 'https://api.urlbox.io/v1/uyxmHTVQwumo6PKD/png?full_page=true&user_agent=desktop&url=https%3A%2F%2Fwww.cisco.com&retina=true&width=700';
 
 const styles = theme => ({
   root: {
@@ -93,10 +93,10 @@ class SubPage extends Component {
     const w = window.innerWidth * .9;
     const options = {
       url: this.state.baseUrl,
-      retina: true,
+      retina: false,
       format: 'png',
-      full_page: true,
       width: w,
+      height: w*2,
     };
     if (this.imgInput) {
       this.imgInput.src = urlbox.buildUrl(options);
@@ -137,11 +137,16 @@ class SubPage extends Component {
 
   stopLoading = () => this.setState(state => ({ loading: false }));
   startLoading = () => this.setState(state => ({ loading: true }));
+  
+  handleError = event => {
+    this.stopLoading();
+    this.setState({config: false});
+    this.imgInput.src = ciscoImg;
+  }
 
   render() {
     const { classes } = this.props;
     const { mayday, callString, loading, config } = this.state;
-    const ciscoImg = 'https://api.urlbox.io/v1/uyxmHTVQwumo6PKD/png?full_page=true&user_agent=desktop&url=https%3A%2F%2Fwww.cisco.com&retina=true&width=700';
 
     return (
       <div className={classes.root} >
@@ -154,7 +159,7 @@ class SubPage extends Component {
           </div>)}
         {!config && <Controls onSubmit={this.handleSubmit} />}
         {config && (
-          <div class={classes.formContainer}>
+          <div className={classes.formContainer}>
             <Item>
               <Button color='primary' raised onClick={e => { this.setState({ config: false }) }}>
                 Back
@@ -164,7 +169,7 @@ class SubPage extends Component {
         )}
         {config && (
           <div className={loading? classes.hidden : classes.flexItem }>
-            <img onLoad={this.stopLoading} alt='' src={ciscoImg} width='100%'
+            <img onLoad={this.stopLoading} onError={this.handleError} alt='' src={ciscoImg} width='100%'
               ref={(input) => { this.imgInput = input; }} />
             <CallContainer
               mayday={mayday}

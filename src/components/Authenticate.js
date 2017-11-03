@@ -18,7 +18,11 @@ class Authenticate extends Component {
 
   handleLogin = e => {
     e.preventDefault();
-    this.props.store.api.authorization.initiateLogin();
+    this.props.store.api.authorization.initiateLogin({
+      state: {
+        page: 'call'
+      }
+    });
   }
 
   render() {

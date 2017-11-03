@@ -50,7 +50,7 @@ class CustomPage extends PureComponent {
       baseUrl: '',
       callString: '',
       sipCall: true,
-      mayday: false,
+      mayday: true,
       callSize: '25%',
     }
   }
@@ -73,6 +73,7 @@ class CustomPage extends PureComponent {
     this.setState({ [name]: checked });
   };
 
+
   render() {
     const { classes } = this.props;
     return (
@@ -83,6 +84,8 @@ class CustomPage extends PureComponent {
             id="required"
             label="Branding Website URL"
             margin="normal"
+            placeholder='https://www.cisco.com/'
+            helperText='(Enter Full URL)'
             className={classes.textField}
             fullWidth={true}
             onChange={this.handleChange('baseUrl')}
@@ -91,6 +94,8 @@ class CustomPage extends PureComponent {
             required
             id="required"
             label="Spark or URI Calling Address"
+            placeholder='roomkit@sparkdemos.com'
+            helperText='(eg. user@domain.com)'
             margin="normal"
             className={classes.textField}
             fullWidth={true}
@@ -124,7 +129,7 @@ class CustomPage extends PureComponent {
                   onChange={this.handleSwitch('sipCall')}
                   aria-label="Sip Call"
                 />}
-              label='SIP Call' />
+              label={this.state.sipCall ? 'SIP Call' : 'Spark Call'} />
           </FormGroup>
           <FormGroup>
             <FormControlLabel
@@ -138,7 +143,7 @@ class CustomPage extends PureComponent {
           </FormGroup>
         </Item>
         <Item flex='0 0 100%'>
-          <Button color='primary' className={classes.button}
+          <Button color='primary' className={classes.button} 
             raised onClick={this.handlePage}>
             Run
         </Button>

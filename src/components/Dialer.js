@@ -9,6 +9,7 @@ import VoiceChatIcon from 'material-ui-icons/VoiceChat';
 import Draggable from 'react-draggable';
 import IconButton from 'material-ui/IconButton';
 import DragHandle from 'material-ui-icons/DragHandle';
+import Typography from 'material-ui/Typography';
 
 const containerStyle = {
   flexDirection: 'row',
@@ -27,7 +28,7 @@ export default class Dialer extends PureComponent {
     super(props);
     this.state = {
       callString: this.props.callString || '',
-      sipCall: false,
+      sipCall: true,
       mayday: this.props.mayday || false,
     };
   }
@@ -74,6 +75,8 @@ export default class Dialer extends PureComponent {
               id="required"
               label="Enter Address"
               margin="normal"
+              placeholder='roomkit@sparkdemos.com'
+              helperText='(eg. user@domain.com)'
               fullWidth={true}
               onChange={this.handleChange('callString')} />
           </Item>
@@ -88,7 +91,7 @@ export default class Dialer extends PureComponent {
                     onChange={this.handleSwitch('sipCall')}
                     aria-label="Sip Call"
                   />}
-                label='SIP Call' />
+                label={this.state.sipCall ? 'SIP Call' : 'Spark Call'} />
             </FormGroup>
           </Item>
         )}

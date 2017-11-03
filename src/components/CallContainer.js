@@ -61,8 +61,6 @@ class CallContainer extends Component {
   }
 
   componentDidMount() {
-    console.log('Component will mount');
-    console.log(this.props.store.authenticated);
     let incomingVideo = this.incomingVideo;
     let outgoingVideo = this.outgoingVideo;
 
