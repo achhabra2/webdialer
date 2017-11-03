@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
+import React, { PureComponent } from 'react';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
@@ -13,24 +12,14 @@ const styles = theme => ({
   },
 });
 
-@inject('store') @observer
-class Authenticate extends Component {
 
-  handleLogin = e => {
-    e.preventDefault();
-    this.props.store.api.authorization.initiateLogin({
-      state: {
-        page: 'call'
-      }
-    });
-  }
-
+class Authenticate extends PureComponent {
   render() {
-    const { classes } = this.props;
+    const { classes, handleLogin } = this.props;
     return (
       <Grid item xs={12}>
         <Button raised
-          className={classes.button} onClick={this.handleLogin}>
+          className={classes.button} onClick={handleLogin}>
           Click to Authorize
     </Button>
       </Grid>

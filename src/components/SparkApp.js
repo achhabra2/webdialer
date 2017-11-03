@@ -33,7 +33,7 @@ class SparkApp extends Component {
           <Route exact path="/login" component={LoginPage} authenticated={store.authenticated} />
           <Route exact path='/' authenticated={store.authenticated} render={props => (
             <Redirect to={{
-              pathname: '/login',
+              pathname: '/call',
               state: { from: props.location }
             }} />
           )} />

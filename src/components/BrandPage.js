@@ -27,7 +27,7 @@ class BrandPage extends Component {
       this.props.store.api.authorization
         .initiateLogin({
           state: {
-            page: 'brand',
+            page: '/brand',
             ...query
           }
         });

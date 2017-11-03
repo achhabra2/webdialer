@@ -15,7 +15,8 @@ const containerStyle = {
   flexDirection: 'row',
   alignItems: 'center',
   alignContent: 'center',
-  width: '100%'
+  width: '100%',
+  textAlign: 'center',
 };
 
 export default class Dialer extends PureComponent {
@@ -78,6 +79,7 @@ export default class Dialer extends PureComponent {
               placeholder='roomkit@sparkdemos.com'
               helperText='(eg. user@domain.com)'
               fullWidth={true}
+              value={this.state.callString}
               onChange={this.handleChange('callString')} />
           </Item>
         )}

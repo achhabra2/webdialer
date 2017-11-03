@@ -83,7 +83,8 @@ class CallContainer extends Component {
         call.acknowledge();
       });
     }
-
+    if (this.props.immediate && this.props.callString)
+      this.placeCall(this.props.callString)
   }
 
 
@@ -160,7 +161,7 @@ class CallContainer extends Component {
         {loading && <div className={classes.progress}> <CircularProgress size={80} color='accent' /> </div>}
         {!callActive && !loading && <Dialer mayday={mayday} callString={callString} onDial={this.placeCall} />}
         <IncomingToast open={incomingCall} onAnswer={this.handleAccept} onIgnore={this.handleIgnore} />
-        <div className={callActive? classes.draggable : classes.hidden }>
+        <div className={callActive ? classes.draggable : classes.hidden}>
           <Draggable>
             <Paper className={classes.root} elevation={10}>
               <Video incoming={this.incomingVideoInput} outgoing={this.outgoingVideoInput} fullScreen={this.fullScreenInput}>

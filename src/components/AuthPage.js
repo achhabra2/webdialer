@@ -16,13 +16,13 @@ export class AuthPage extends Component {
     this.setState({ page, query });
   }
   render() {
-    const query = qs.stringify(this.state.query);
+    const query = this.state.query? qs.stringify(this.state.query) : '';
     return (
       <div>
         Authenticating...
         {this.state.page && this.props.store.authenticated &&
           <Redirect to={{
-            pathname: `/${this.state.page}`,
+            pathname: this.state.page,
             search: `?${query}`
           }} />}
       </div>

@@ -2,20 +2,27 @@ import React, { Component } from 'react'
 import Authenticate from './Authenticate';
 import Grid from 'material-ui/Grid';
 import { inject, observer } from 'mobx-react';
-
+import qs from 'query-string';
 
 @inject('store') @observer
 class LoginPage extends Component {
 
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.store.authenticated) {
-      nextProps.history.push('/call')
-    }
+  componentWillMount() {
+    const { from } = this.props.location.state;
+    let query = from.search ? qs.parse(from.search) : {};
+    this.setState({
+      page: from.pathname,
+      ...query
+    });
   }
 
-  componentWillMount() {
-    if (this.props.store.authenticated) {
-      this.props.history.push('/call')
+  handleLogin = event => {
+    const {store} = this.props;
+    if (!store.authenticated) {
+      store.api.authorization
+        .initiateLogin({
+          state: this.state
+        });
     }
   }
 
@@ -25,7 +32,7 @@ class LoginPage extends Component {
         spacing={24}
         alignItems='center'
         justify='center'>
-        <Authenticate />
+        <Authenticate handleLogin={this.handleLogin} />
       </Grid>
     )
   }

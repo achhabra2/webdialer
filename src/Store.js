@@ -13,11 +13,9 @@ let authUrl = `https://api.ciscospark.com/v1/authorize?client_id=C6db8b9e03171d9
 
 class Store {
   @observable authenticated = false;
-  @observable navbarImage;
-  @observable navbarText = 'Spark Web Dialer';
-  @observable navbarColor;
   @observable navbarHidden = false;
   @observable lastPage;
+  @observable redirectState;
   
   constructor() {
       this.api = Spark.init({
@@ -31,13 +29,6 @@ class Store {
         if (this.api.canAuthorize)
           this.authenticated = true;
       });
-    // if (typeof window) {
-    //   this.api = window.spark;
-    //   this.api.once('ready', () => {
-    //     if (this.api.canAuthorize)
-    //       this.authenticated = true;
-    //   });
-    // }
   }
 
   @action setAuth() {
@@ -58,20 +49,16 @@ class Store {
     this.navbarImage = url;
   }
 
-  @action setText(text) {
-    this.navbarText = text;
-  }
-
-  @action setColor(color) {
-    this.navbarColor = color;
-  }
-
   @action setNavbarHidden = (bool) => {
     this.navbarHidden = bool;
   }
 
   @action setLastPage = (lastPage) => {
     this.lastPage = lastPage;
+  }
+
+  @action setRedirectState = (state) => {
+    this.redirectState = state;
   }
 
 }
