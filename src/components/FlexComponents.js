@@ -59,6 +59,7 @@ class Item extends PureComponent {
       position, 
       alignSelf, 
       textAlign,
+      minWidth,
       ...other 
     } = this.props;
 
@@ -70,6 +71,7 @@ class Item extends PureComponent {
       position: position || 'relative',
       alignSelf: alignSelf || 'auto',
       textAlign: textAlign || 'center',
+      minWidth: minWidth || 'auto',
     };
 
     const merged = Object.assign({}, template, style);

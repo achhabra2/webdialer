@@ -25,9 +25,9 @@ const styles = theme => ({
 });
 
 const controlStyle = {
-  flexDirection: 'row',
+  flexDirection: 'column',
   alignItems: 'flex-start',
-  alignContent: 'center',
+  alignContent: 'baseline',
   width: '90%',
   textAlign: 'center',
   margin: 'auto',

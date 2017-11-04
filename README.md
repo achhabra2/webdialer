@@ -1,6 +1,31 @@
 ## Spark Webdialer
 #### by Aman Chhabra
 ---
+#### Updates
+Couple of updates on the webdialer: 
+
+You can create a simple branded video page with just a URL of your banner to display above the video panel. Find the banner of your choice (easiest to go to images.google.com and search). Then put it in this URL: 
+
+https://webdialer.chhab.rocks/brand?banner=**YOUR URL**
+
+You will be prompted to log in to your Spark account and… voila you will have your very own custom-branded Spark video page. 
+
+Another one is really cool: 
+
+Create your own custom calling links by prepopulating the SIP or Spark video address as well as setting the option to immediately start the call. 
+
+Use this URL: 
+
+https://webdialer.chhab.rocks/call?
+
+And use uri=**YOUR SIP ADDRESS**
+And use immediate=``true`` or ``false``
+
+So for example a full URL would be: 
+``https://webdialer.chhab.rocks/call?uri=roomkit@sparkdemos.com&immediate=true``
+
+This URL once the user authenticates will immediately start a call to ``roomkit@sparkdemos.com``. 
+
 #### About
 The Webdialer app is a Cisco Spark Video Client that is embedded into a web browser. Through the use of the [Spark JS SDK](https://developer.ciscospark.com/sdk-for-nodejs.html) and WebRTC in both Chrome and Firefox you are able to make either a Spark Video Call, or a standards based SIP Video Call. Additionally it allows you to overlay Cisco Spark Video on top of any website or branding URL you provide. 
 ***

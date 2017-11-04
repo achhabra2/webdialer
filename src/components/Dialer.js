@@ -12,12 +12,16 @@ import DragHandle from 'material-ui-icons/DragHandle';
 import Typography from 'material-ui/Typography';
 
 const containerStyle = {
-  flexDirection: 'row',
-  alignItems: 'center',
-  alignContent: 'center',
+  flexDirection: 'column',
+  alignItems: 'baseline',
+  alignContent: 'flex-start',
   width: '100%',
   textAlign: 'center',
 };
+
+const textFieldStyle = {
+  minWidth: '400px',
+}
 
 export default class Dialer extends PureComponent {
   static propTypes = {
@@ -70,7 +74,7 @@ export default class Dialer extends PureComponent {
     return (
       <Container className={this.props.className} style={containerStyle}>
         {!this.props.callString && (
-          <Item flex='0 0 100%'>
+          <Item flex='1 1 60%%'>
             <TextField
               required
               id="required"
@@ -80,12 +84,13 @@ export default class Dialer extends PureComponent {
               helperText='(eg. user@domain.com)'
               fullWidth={true}
               value={this.state.callString}
-              onChange={this.handleChange('callString')} />
+              onChange={this.handleChange('callString')}
+              style={textFieldStyle} />
           </Item>
         )}
         {!this.props.callString && (
-          <Item flex='0 0 100%'>
-            <FormGroup>
+          <Item flex='1 1 60%'>
+            <FormGroup style={textFieldStyle}>
               <FormControlLabel
                 control={
                   <Switch
@@ -97,7 +102,7 @@ export default class Dialer extends PureComponent {
             </FormGroup>
           </Item>
         )}
-        <Item flex='0 0 100%'>
+        <Item flex='1 1 100%'>
           <Button color='primary' raised onClick={this.handleDial}>
             Place Call
         </Button>
