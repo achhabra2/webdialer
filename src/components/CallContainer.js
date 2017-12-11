@@ -11,6 +11,7 @@ import Dialer from './Dialer';
 import Video from './Video';
 import IncomingToast from './IncomingToast';
 import Draggable from 'react-draggable';
+import ReactGA from 'react-ga';
 
 const styles = theme => ({
   container: {
@@ -110,6 +111,10 @@ class CallContainer extends Component {
     this.setState({
       callActive: false
     });
+    ReactGA.event({
+      category: 'Call',
+      action: 'Ended'
+    });
   }
 
   handleMute = e => {
@@ -125,6 +130,10 @@ class CallContainer extends Component {
   handleAccept = e => {
     this.setState(state => ({ incomingCall: false }));
     this.call.answer();
+    ReactGA.event({
+      category: 'Call',
+      action: 'Answered'
+    });
   }
 
   handleIgnore = e => {
@@ -136,6 +145,10 @@ class CallContainer extends Component {
     let incomingVideo = this.incomingVideo;
     let outgoingVideo = this.outgoingVideo;
     this.call = this.props.store.api.phone.dial(callString);
+    ReactGA.event({
+      category: 'Call',
+      action: 'Placed'
+    });
     this.setState(state => ({ loading: true }));
     this.call.on('active', () => {
       console.log('Call Active');

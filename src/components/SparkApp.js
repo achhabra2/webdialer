@@ -10,6 +10,7 @@ import LoginPage from './LoginPage';
 import DevTools from 'mobx-react-devtools'
 import BrandPage from './BrandPage';
 import AuthPage from './AuthPage';
+import WidgetPage from './WidgetPage';
 
 const rootStyle = {
   textAlign: 'center'
@@ -17,18 +18,20 @@ const rootStyle = {
 
 
 class SparkApp extends Component {
+
   render() {
     const { store, location } = this.props;
     return (
       <div style={rootStyle}>
         {/* <DevTools /> */}
-        {!store.navbarHidden && <Navbar location={location} authenticated={store.authenticated} />}
+        {!store.navbarHidden && <Navbar location={location} authenticated={store.authenticated} user={store.user} />}
         <Switch>
           <PrivateRoute authenticated={store.authenticated} path="/call" component={CallPage} />
           <PrivateRoute authenticated={store.authenticated} path="/custom" component={SubPage} />
           <Route path='/auth' component={AuthPage} />
           <Route path='/about' component={About} />
           <Route path='/brand' component={BrandPage} />
+          <Route path='/widget' component={WidgetPage} />
           <Route path='/controls' component={Controls} />
           <Route exact path="/login" component={LoginPage} authenticated={store.authenticated} />
           <Route exact path='/' authenticated={store.authenticated} render={props => (

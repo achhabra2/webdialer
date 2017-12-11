@@ -5,9 +5,10 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import SparkApp from './components/SparkApp';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import { inject, observer } from 'mobx-react';
+import ReactGA from 'react-ga';
 import blue from 'material-ui/colors/blue';
 import cyan from 'material-ui/colors/cyan';
-
+import config from './.config';
 
 const theme = createMuiTheme({
   palette: {
@@ -16,14 +17,8 @@ const theme = createMuiTheme({
   }
 });
 
-// @inject('store') @observer
+
 class App extends Component {
-  // componentWillMount() {
-  //   let params = (new URL(document.location)).searchParams;
-  //   let name = params.get('state');
-  //   if (name)
-  //     this.props.store.setLastPage(name);
-  // }
 
   render() {
     return (
@@ -35,10 +30,18 @@ class App extends Component {
 }
 
 class AppContainer extends Component {
+  componentWillMount() {
+    ReactGA.initialize(config.GA);
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }
+
+  updateGA = () => {
+    ReactGA.pageview(window.location.pathname);
+  }
   render() {
     return (
       <Provider store={new Store()}>
-        <BrowserRouter forceRefresh={false}>
+        <BrowserRouter onUpdate={this.updateGA} forceRefresh={false}>
           <App />
         </BrowserRouter>
       </Provider>

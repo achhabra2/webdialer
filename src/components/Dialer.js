@@ -33,7 +33,7 @@ export default class Dialer extends PureComponent {
     super(props);
     this.state = {
       callString: this.props.callString || '',
-      sipCall: true,
+      sipCall: false,
       mayday: this.props.mayday || false,
     };
   }
@@ -48,6 +48,7 @@ export default class Dialer extends PureComponent {
     let dialStr;
     this.state.sipCall ? dialStr = `sip:${this.state.callString}` : dialStr = this.state.callString;
     this.props.onDial(dialStr);
+    
   };
 
   handleSwitch = name => (event, checked) => {

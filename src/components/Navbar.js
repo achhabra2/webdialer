@@ -17,10 +17,18 @@ const styles = theme => ({
 class SimpleAppBar extends React.PureComponent {
 
   checkSelected = (text) => {
-    if(text) {
-      if(text === 'login' || text === 'call' || text === 'custom' || text === 'about')
+    if (text) {
+      if (text === 'call' || text === 'custom' || text === 'about')
         return text;
     } else return false;
+  }
+
+  renderTab() {
+    if (this.props.authenticated) {
+      return <Tab value='account' label={this.props.user? this.props.user.displayName : 'User'} />
+    } else {
+      return <Tab value='login' label="Login" />
+    }
   }
 
   render() {
@@ -34,7 +42,7 @@ class SimpleAppBar extends React.PureComponent {
               Spark Web Dialer
           </Typography>
             <Tabs scrollable={false} centered value={this.checkSelected(path)} fullWidth={true}>
-              {!authenticated && <Tab value='login' label="Login" component={Link} to='/login' />}
+              {this.renderTab()}
               <Tab value='call' label="Dialer" component={Link} to='/call' />
               <Tab value='custom' label="Custom Demo" component={Link} to='/custom' />
               <Tab value='about' label="About" component={Link} to='/about' />

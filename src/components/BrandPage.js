@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { Container, Item } from './FlexComponents';
 import CallContainer from './CallContainer';
 import qs from 'query-string';
+import ReactGA from 'react-ga';
 
 const barclays = 'https://www.barclayscorporate.com/_jcr_content/header_par/header/image.img.jpg/1505304181708.jpg'
 const lloyds = 'https://international.lloydsbank.com/components/img/international/logo-lloyds-bank-print.png';
@@ -34,6 +35,10 @@ class BrandPage extends Component {
     }
     else {
       if (query.banner) {
+        ReactGA.event({
+          category: 'Banner',
+          action: 'Loaded'
+        });
         switch(query.banner) {
           case 'barclays': 
             this.setState({banner: barclays})

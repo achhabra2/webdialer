@@ -10,6 +10,7 @@ import Urlbox from 'urlbox';
 import Controls from './Forms/CustomPage';
 import { Item } from './FlexComponents';
 import Typography from 'material-ui/Typography';
+import ReactGA from 'react-ga';
 
 // Plugin your API key and secret
 const urlbox = Urlbox('uyxmHTVQwumo6PKD', '3d74f6cee5b34eada3893332bd66579b');
@@ -125,6 +126,10 @@ class SubPage extends Component {
 
   handleSubmit = (config, event) => {
     // Set your options
+    ReactGA.event({
+      category: 'Brand',
+      action: 'Applied'
+    });
     this.startLoading();
     this.setState(state => ({
       baseUrl: config.baseUrl,
