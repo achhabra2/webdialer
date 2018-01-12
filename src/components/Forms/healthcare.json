@@ -1,0 +1,72 @@
+const categories = [
+  {
+    name: 'Appliances',
+    value: 'appliances'
+  },
+  {
+    name: 'TV & Home Theater',
+    value: 'tv'
+  },
+  {
+    name: 'Computers & Tablets',
+    value: `computer`
+  },
+  {
+    name: `Cell Phones`,
+    value: 'phone'
+  },
+  {
+    name: `Audio, Video Games`,
+    value: 'avg'
+  },
+  {
+    name: `Movies & Music`,
+    value: 'movies'
+  },
+  {
+    name: `Car Electronics & GPS`,
+    value: 'car'
+  },
+  {
+    name: `Wearable Technology`,
+    value: 'wearable'
+  },
+  {
+    name: `Health`,
+    value: 'health'
+  },
+  {
+    name: `Fitness & Beauty`,
+    value: 'fitness'
+  },
+  {
+    name: `Home, Garage & Office`,
+    value: 'home'
+  },
+  {
+    name: `Smart Home Security & Wi-Fi`,
+    value: 'smarthome'
+  }];
+
+const help = [
+  {
+    name: 'Sales',
+    value: 'sales'
+  },
+  {
+    name: 'Customer Service',
+    value: 'service'
+  },
+  {
+    name: 'Returns / Exchange',
+    value: 'returns'
+  },
+  {
+    name: 'Magnolia',
+    value: 'magnolia'
+  },
+  {
+    name: 'Geek Squad',
+    value: 'geek'
+  }
+];

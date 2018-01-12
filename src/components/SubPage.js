@@ -10,6 +10,7 @@ import Urlbox from 'urlbox';
 import Controls from './Forms/CustomPage';
 import { Item } from './FlexComponents';
 import Typography from 'material-ui/Typography';
+import WidgetContainer from './WidgetContainer';
 import ReactGA from 'react-ga';
 
 // Plugin your API key and secret
@@ -87,6 +88,7 @@ class SubPage extends Component {
       mayday: false,
       callString: '',
       callSize: '25%',
+      widget: false,
     };
   }
 
@@ -97,7 +99,7 @@ class SubPage extends Component {
       retina: false,
       format: 'png',
       width: w,
-      height: w*2,
+      height: w * 2,
     };
     if (this.imgInput) {
       this.imgInput.src = urlbox.buildUrl(options);
@@ -136,16 +138,17 @@ class SubPage extends Component {
       callString: config.callString,
       mayday: config.mayday,
       callSize: config.callSize || '25%',
+      widget: config.widget,
       config: true,
     }));
   };
 
   stopLoading = () => this.setState(state => ({ loading: false }));
   startLoading = () => this.setState(state => ({ loading: true }));
-  
+
   handleError = event => {
     this.stopLoading();
-    this.setState({config: false});
+    this.setState({ config: false });
     this.imgInput.src = ciscoImg;
   }
 
@@ -166,22 +169,27 @@ class SubPage extends Component {
         {config && (
           <div className={classes.formContainer}>
             <Item>
-              <Button color='primary' raised onClick={e => { this.setState({ config: false }) }}>
+              <Button color='primary' raised onClick={e => { this.setState({ config: false, loading: false }) }}>
                 Back
         </Button>
             </Item>
           </div>
         )}
         {config && (
-          <div className={loading? classes.hidden : classes.flexItem }>
+          <div className={loading ? classes.hidden : classes.flexItem}>
             <img onLoad={this.stopLoading} onError={this.handleError} alt='' src={ciscoImg} width='100%'
               ref={(input) => { this.imgInput = input; }} />
-            <CallContainer
-              mayday={mayday}
-              callString={callString}
-              className={classes.overlayStyle}
-              style={{ width: this.state.callSize }}
-            />
+            {!this.state.widget ?
+              (<CallContainer
+                mayday={mayday}
+                callString={callString}
+                className={classes.overlayStyle}
+                style={{ width: this.state.callSize }}
+              />)
+              :
+              (
+                <WidgetContainer size={this.state.callSize} className={classes.overlayStyle} data={{ toPersonEmail: callString }} />
+              )}
           </div>
         )}
       </div>

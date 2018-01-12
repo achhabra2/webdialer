@@ -1,0 +1,37 @@
+[
+  {
+    "name": "email",
+    "type": "text",
+    "required": true,
+    "description": "Enter Email",
+    "help": "Who should be contacted?"
+  },
+  {
+    "name": "background",
+    "type": "text",
+    "required": false,
+    "description": "Enter background image URL",
+    "help": "Optional Background Image For Demo"
+  },
+  {
+    "name": "dataset",
+    "type": "select",
+    "required": true,
+    "description": "Choose Vertical",
+    "help": "What type of demo do you want to do?",
+    "data": [
+      {
+        "name": "Retail",
+        "value": "Retail"
+      },
+      {
+        "name": "Healthcare",
+        "value": "Healthcare"
+      },
+      {
+        "name": "Education",
+        "value": "Education"
+      }
+    ]
+  }
+]

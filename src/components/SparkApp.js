@@ -10,7 +10,7 @@ import LoginPage from './LoginPage';
 import DevTools from 'mobx-react-devtools'
 import BrandPage from './BrandPage';
 import AuthPage from './AuthPage';
-import WidgetPage from './WidgetPage';
+import CarePage from './CarePage';
 
 const rootStyle = {
   textAlign: 'center'
@@ -19,6 +19,17 @@ const rootStyle = {
 
 class SparkApp extends Component {
 
+  componentDidMount() {
+    let aScript = document.createElement('script');
+    aScript.type = 'text/javascript';
+    aScript.src = "https://code.s4d.io/widget-space/production/bundle.js";
+    document.head.appendChild(aScript);
+    let css = document.createElement('link');
+    css.rel="stylesheet";
+    css.href="https://code.s4d.io/widget-space/production/main.css"
+    document.head.appendChild(css);
+  }
+  
   render() {
     const { store, location } = this.props;
     return (
@@ -31,8 +42,7 @@ class SparkApp extends Component {
           <Route path='/auth' component={AuthPage} />
           <Route path='/about' component={About} />
           <Route path='/brand' component={BrandPage} />
-          <Route path='/widget' component={WidgetPage} />
-          <Route path='/controls' component={Controls} />
+          <Route path='/care' component={CarePage} />
           <Route exact path="/login" component={LoginPage} authenticated={store.authenticated} />
           <Route exact path='/' authenticated={store.authenticated} render={props => (
             <Redirect to={{

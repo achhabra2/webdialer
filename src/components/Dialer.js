@@ -9,7 +9,7 @@ import VoiceChatIcon from 'material-ui-icons/VoiceChat';
 import Draggable from 'react-draggable';
 import IconButton from 'material-ui/IconButton';
 import DragHandle from 'material-ui-icons/DragHandle';
-import Typography from 'material-ui/Typography';
+import validator from 'validator';
 
 const containerStyle = {
   flexDirection: 'column',
@@ -33,12 +33,23 @@ export default class Dialer extends PureComponent {
     super(props);
     this.state = {
       callString: this.props.callString || '',
-      sipCall: false,
+      sipCall: true,
+      formValid: false,
+      uriValid: true,
       mayday: this.props.mayday || false,
+      widget: this.props.widget || false
     };
   }
 
   handleChange = name => event => {
+    if (name === "callString") {
+      if (validator.isEmail(event.target.value)) {
+        this.setState({ uriValid: true, formValid: true });
+      }
+      else {
+        this.setState({ uriValid: false })
+      }
+    }
     this.setState({
       [name]: event.target.value
     });
@@ -46,9 +57,8 @@ export default class Dialer extends PureComponent {
 
   handleDial = event => {
     let dialStr;
-    this.state.sipCall ? dialStr = `sip:${this.state.callString}` : dialStr = this.state.callString;
-    this.props.onDial(dialStr);
-    
+    (this.state.sipCall && !this.state.widget) ? dialStr = `sip:${this.state.callString}` : dialStr = this.state.callString;
+    this.props.onDial({ callString: dialStr, widget: this.state.widget });
   };
 
   handleSwitch = name => (event, checked) => {
@@ -73,14 +83,16 @@ export default class Dialer extends PureComponent {
   }
   renderDialer() {
     return (
-      <Container className={this.props.className} style={containerStyle}>
+      <Container className={this.props.className} style={containerStyle} component="form" autoComplete="off">
         {!this.props.callString && (
           <Item flex='1 1 60%%'>
             <TextField
               required
-              id="required"
+              id="uri"
               label="Enter Address"
               margin="normal"
+              type="email"
+              error={!this.state.uriValid}
               placeholder='roomkit@sparkdemos.com'
               helperText='(eg. user@domain.com)'
               fullWidth={true}
@@ -91,7 +103,7 @@ export default class Dialer extends PureComponent {
         )}
         {!this.props.callString && (
           <Item flex='1 1 60%'>
-            <FormGroup style={textFieldStyle}>
+            {!this.state.widget && <FormGroup style={textFieldStyle}>
               <FormControlLabel
                 control={
                   <Switch
@@ -100,11 +112,21 @@ export default class Dialer extends PureComponent {
                     aria-label="Sip Call"
                   />}
                 label={this.state.sipCall ? 'SIP Call' : 'Spark Call'} />
+            </FormGroup>}
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={this.state.widget}
+                    onChange={this.handleSwitch('widget')}
+                    aria-label="Widget Mode"
+                  />}
+                label={this.state.widget ? 'Widget' : 'SDK'} />
             </FormGroup>
           </Item>
         )}
         <Item flex='1 1 100%'>
-          <Button color='primary' raised onClick={this.handleDial}>
+          <Button color='primary' disabled={!this.state.formValid} raised type="submit" onClick={this.handleDial}>
             Place Call
         </Button>
         </Item>

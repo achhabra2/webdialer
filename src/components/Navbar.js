@@ -18,14 +18,14 @@ class SimpleAppBar extends React.PureComponent {
 
   checkSelected = (text) => {
     if (text) {
-      if (text === 'call' || text === 'custom' || text === 'about')
+      if (text === 'call' || text === 'custom' || text === 'about' || text === 'care')
         return text;
     } else return false;
   }
 
   renderTab() {
     if (this.props.authenticated) {
-      return <Tab value='account' label={this.props.user? this.props.user.displayName : 'User'} />
+      return <Tab value='account' label={this.props.user ? this.props.user.displayName : 'User'} />
     } else {
       return <Tab value='login' label="Login" />
     }
@@ -45,6 +45,7 @@ class SimpleAppBar extends React.PureComponent {
               {this.renderTab()}
               <Tab value='call' label="Dialer" component={Link} to='/call' />
               <Tab value='custom' label="Custom Demo" component={Link} to='/custom' />
+              <Tab value='care' label="Care Demo" component={Link} to='/care' />
               <Tab value='about' label="About" component={Link} to='/about' />
             </Tabs>
           </Toolbar>

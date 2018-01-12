@@ -12,6 +12,7 @@ import Video from './Video';
 import IncomingToast from './IncomingToast';
 import Draggable from 'react-draggable';
 import ReactGA from 'react-ga';
+import WidgetContainer from './WidgetContainer';
 
 const styles = theme => ({
   container: {
@@ -58,6 +59,7 @@ class CallContainer extends Component {
       },
       videoElement: null,
       mayday: this.props.mayday || false,
+      widget: this.props.widget || false
     }
   }
 
@@ -141,40 +143,49 @@ class CallContainer extends Component {
     this.call.reject();
   }
 
-  placeCall = callString => {
-    let incomingVideo = this.incomingVideo;
-    let outgoingVideo = this.outgoingVideo;
-    this.call = this.props.store.api.phone.dial(callString);
+  placeCall = options => {
     ReactGA.event({
       category: 'Call',
       action: 'Placed'
     });
-    this.setState(state => ({ loading: true }));
-    this.call.on('active', () => {
-      console.log('Call Active');
-      this.setState(state => ({ loading: false, callActive: true }));
-    });
-    this.call.on('remoteMediaStream:change', () => {
-      console.log('Connected! ')
-      incomingVideo.srcObject = this.call.remoteMediaStream;
-      this.setState(state => ({ loading: false, callActive: true }));
-    });
-    this.call.on('localMediaStream:change', () => {
-      outgoingVideo.srcObject = this.call.localMediaStream;
-      // Mute the local video so you don't hear yourself speaking
-      outgoingVideo.muted = true;
-    });
+    const { callString, widget } = options;
+    if (widget) {
+      this.setState({ widget: true, callString: callString, loading: false, callActive: true });
+    }
+    else {
+      let incomingVideo = this.incomingVideo;
+      let outgoingVideo = this.outgoingVideo;
+      this.call = this.props.store.api.phone.dial(callString);
+      this.setState(state => ({ loading: true }));
+      this.call.on('active', () => {
+        console.log('Call Active');
+        this.setState(state => ({ loading: false, callActive: true }));
+      });
+      this.call.on('remoteMediaStream:change', () => {
+        console.log('Connected! ')
+        incomingVideo.srcObject = this.call.remoteMediaStream;
+        this.setState(state => ({ loading: false, callActive: true }));
+      });
+      this.call.on('localMediaStream:change', () => {
+        outgoingVideo.srcObject = this.call.localMediaStream;
+        // Mute the local video so you don't hear yourself speaking
+        outgoingVideo.muted = true;
+      });
+    }
   }
 
   render() {
     const { classes } = this.props;
-    const { loading, callActive, incomingCall, mayday, callString } = this.state;
+    const { loading, callActive, incomingCall, mayday, callString, widget } = this.state;
     return (
       <div className={this.props.className} style={this.props.style}>
         {loading && <div className={classes.progress}> <CircularProgress size={80} color='accent' /> </div>}
-        {!callActive && !loading && <Dialer mayday={mayday} callString={callString} onDial={this.placeCall} />}
+        {!callActive && !loading && <Dialer mayday={mayday} widget={widget} callString={callString} onDial={this.placeCall} />}
         <IncomingToast open={incomingCall} onAnswer={this.handleAccept} onIgnore={this.handleIgnore} />
-        <div className={callActive ? classes.draggable : classes.hidden}>
+        {widget? 
+          (<WidgetContainer size="90%" data={{toPersonEmail: callString, startCall: true}}/>)
+          :
+          (<div className={callActive ? classes.draggable : classes.hidden}>
           <Draggable>
             <Paper className={classes.root} elevation={10}>
               <Video incoming={this.incomingVideoInput} outgoing={this.outgoingVideoInput} fullScreen={this.fullScreenInput}>
@@ -187,7 +198,7 @@ class CallContainer extends Component {
               </Video>
             </Paper>
           </Draggable>
-        </div>
+        </div>)}
       </div>
     );
   }

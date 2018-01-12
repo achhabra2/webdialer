@@ -1,0 +1,65 @@
+[
+  {
+    "name": "area",
+    "type": "select",
+    "required": true,
+    "description": "What is the area of your house?",
+    "help": "Enter the area in sq ft.",
+    "data": [
+      {
+        "name": "Less than 2500",
+        "value": "<2500"
+      },
+      {
+        "name": "2500 < -- > 5000",
+        "value": "2500-5000"
+      },
+      {
+        "name": "Greater than 5000",
+        "value": ">2500"
+      }
+    ]
+  },
+  {
+    "name": "floors",
+    "type": "select",
+    "required": true,
+    "description": "How many floors in your house?",
+    "help": "Enter floors in whole numbers",
+    "data": [
+      {
+        "name": "1 floor",
+        "value": 1
+      },
+      {
+        "name": "2 floors",
+        "value": 2
+      },
+      {
+        "name": "3 floors",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "name": "internet",
+    "type": "select",
+    "required": true,
+    "description": "What type of Internet access do you have?",
+    "help": "Type of internet access",
+    "data": [
+      {
+        "name": "Cable",
+        "value": "Cable"
+      },
+      {
+        "name": "DSL",
+        "value": "DSL"
+      },
+      {
+        "name": "Fiber",
+        "value": "Fiber"
+      }
+    ]
+  }
+]

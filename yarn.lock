@@ -2,23 +2,23 @@
 # yarn lockfile v1
 
 
-"@ciscospark/common-evented@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/common-evented/-/common-evented-1.21.1.tgz#20b42de9e7468babb689e830ee9034aa9d9b6b47"
+"@ciscospark/common-evented@1.21.4":
+  version "1.21.4"
+  resolved "https://registry.yarnpkg.com/@ciscospark/common-evented/-/common-evented-1.21.4.tgz#babc3d878cdb9145da2f00e85910bec2b1af4ef0"
   dependencies:
-    "@ciscospark/common" "1.21.1"
+    "@ciscospark/common" "1.21.4"
     babel-runtime "^6.23.0"
     envify "^3.4.1"
 
-"@ciscospark/common-timers@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/common-timers/-/common-timers-1.21.1.tgz#98af554b8f811ff7bfa285ef61c0b98230353726"
+"@ciscospark/common-timers@1.21.4":
+  version "1.21.4"
+  resolved "https://registry.yarnpkg.com/@ciscospark/common-timers/-/common-timers-1.21.4.tgz#632a8a82cf55bea71497fe5c09f52965ddd8d3fc"
   dependencies:
     envify "^3.4.1"
 
-"@ciscospark/common@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/common/-/common-1.21.1.tgz#cb4889534a362ecfd0fbf2488cf61d03430d9ff8"
+"@ciscospark/common@1.21.4":
+  version "1.21.4"
+  resolved "https://registry.yarnpkg.com/@ciscospark/common/-/common-1.21.4.tgz#cad8ec2a1ceb83e21efafa9e63f043f96877c9bb"
   dependencies:
     babel-runtime "^6.23.0"
     backoff "^2.5.0"
@@ -27,11 +27,11 @@
     lodash "^4.17.4"
     urlsafe-base64 "^1.0.0"
 
-"@ciscospark/http-core@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/http-core/-/http-core-1.21.1.tgz#6457f9e5cfe420ef8f68db24618d8415675631a9"
+"@ciscospark/http-core@1.21.4":
+  version "1.21.4"
+  resolved "https://registry.yarnpkg.com/@ciscospark/http-core/-/http-core-1.21.4.tgz#f18690d3e41c574e693c4bf75c9995f5bf3a33df"
   dependencies:
-    "@ciscospark/common" "1.21.1"
+    "@ciscospark/common" "1.21.4"
     babel-runtime "^6.23.0"
     envify "^3.4.1"
     file-type "^3.9.0"
@@ -43,36 +43,37 @@
     request "^2.81.0"
     xtend "^4.0.1"
 
-"@ciscospark/internal-plugin-feature@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/internal-plugin-feature/-/internal-plugin-feature-1.21.1.tgz#6d32691dd9230d10cdb031c5c9d545c388d8b2e4"
+"@ciscospark/internal-plugin-feature@1.23.0":
+  version "1.23.0"
+  resolved "https://registry.yarnpkg.com/@ciscospark/internal-plugin-feature/-/internal-plugin-feature-1.23.0.tgz#717e18bb823525cfc4a8c6d21d314b5205eaa814"
   dependencies:
-    "@ciscospark/internal-plugin-wdm" "1.21.1"
-    "@ciscospark/spark-core" "1.21.1"
+    "@ciscospark/internal-plugin-wdm" "1.23.0"
+    "@ciscospark/spark-core" "1.21.4"
     babel-runtime "^6.23.0"
     envify "^3.4.1"
     lodash "^4.17.4"
 
-"@ciscospark/internal-plugin-locus@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/internal-plugin-locus/-/internal-plugin-locus-1.21.1.tgz#e97cdf76a7512237fa0852d1030192db462f062b"
+"@ciscospark/internal-plugin-locus@1.23.2":
+  version "1.23.2"
+  resolved "https://registry.yarnpkg.com/@ciscospark/internal-plugin-locus/-/internal-plugin-locus-1.23.2.tgz#0407017e661de2c2038344dd64685578f0e43b0c"
   dependencies:
-    "@ciscospark/internal-plugin-mercury" "1.21.1"
-    "@ciscospark/spark-core" "1.21.1"
+    "@ciscospark/internal-plugin-mercury" "1.23.2"
+    "@ciscospark/spark-core" "1.21.4"
     babel-runtime "^6.23.0"
     envify "^3.4.1"
     lodash "^4.17.4"
     uuid "^3.0.1"
 
-"@ciscospark/internal-plugin-mercury@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/internal-plugin-mercury/-/internal-plugin-mercury-1.21.1.tgz#43a462fe00a58e85b7c0ee222b360501a6ca672b"
+"@ciscospark/internal-plugin-mercury@1.23.2":
+  version "1.23.2"
+  resolved "https://registry.yarnpkg.com/@ciscospark/internal-plugin-mercury/-/internal-plugin-mercury-1.23.2.tgz#e9ad15e1032d569856e448db254be7d0e9e95672"
   dependencies:
-    "@ciscospark/common" "1.21.1"
-    "@ciscospark/common-timers" "1.21.1"
-    "@ciscospark/internal-plugin-feature" "1.21.1"
-    "@ciscospark/internal-plugin-wdm" "1.21.1"
-    "@ciscospark/spark-core" "1.21.1"
+    "@ciscospark/common" "1.21.4"
+    "@ciscospark/common-timers" "1.21.4"
+    "@ciscospark/internal-plugin-feature" "1.23.0"
+    "@ciscospark/internal-plugin-metrics" "1.23.0"
+    "@ciscospark/internal-plugin-wdm" "1.23.0"
+    "@ciscospark/spark-core" "1.21.4"
     babel-runtime "^6.23.0"
     backoff "^2.5.0"
     envify "^3.4.1"
@@ -81,37 +82,37 @@
     uuid "^3.0.1"
     ws "^1.1.4"
 
-"@ciscospark/internal-plugin-metrics@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/internal-plugin-metrics/-/internal-plugin-metrics-1.21.1.tgz#b1bd9db30baaac1a97a58bcff83ef7baaf76c6ae"
+"@ciscospark/internal-plugin-metrics@1.23.0":
+  version "1.23.0"
+  resolved "https://registry.yarnpkg.com/@ciscospark/internal-plugin-metrics/-/internal-plugin-metrics-1.23.0.tgz#e794a9a9fb581faa215e848ff7c9876f489da5aa"
   dependencies:
-    "@ciscospark/common" "1.21.1"
-    "@ciscospark/common-timers" "1.21.1"
-    "@ciscospark/internal-plugin-wdm" "1.21.1"
-    "@ciscospark/spark-core" "1.21.1"
+    "@ciscospark/common" "1.21.4"
+    "@ciscospark/common-timers" "1.21.4"
+    "@ciscospark/internal-plugin-wdm" "1.23.0"
+    "@ciscospark/spark-core" "1.21.4"
     babel-runtime "^6.23.0"
     envify "^3.4.1"
 
-"@ciscospark/internal-plugin-wdm@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/internal-plugin-wdm/-/internal-plugin-wdm-1.21.1.tgz#8cf3cf940e561a6dc5682833d3957539093e4a9e"
+"@ciscospark/internal-plugin-wdm@1.23.0":
+  version "1.23.0"
+  resolved "https://registry.yarnpkg.com/@ciscospark/internal-plugin-wdm/-/internal-plugin-wdm-1.23.0.tgz#f79e2166a4f3e263e304c306b69471b933cc02ba"
   dependencies:
-    "@ciscospark/common" "1.21.1"
-    "@ciscospark/common-timers" "1.21.1"
-    "@ciscospark/http-core" "1.21.1"
-    "@ciscospark/spark-core" "1.21.1"
+    "@ciscospark/common" "1.21.4"
+    "@ciscospark/common-timers" "1.21.4"
+    "@ciscospark/http-core" "1.21.4"
+    "@ciscospark/spark-core" "1.21.4"
     ampersand-collection "^2.0.0"
     ampersand-state "^5.0.2"
     babel-runtime "^6.23.0"
     envify "^3.4.1"
     lodash "^4.17.4"
 
-"@ciscospark/media-engine-webrtc@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/media-engine-webrtc/-/media-engine-webrtc-1.21.1.tgz#2d9f721944b2f6941ba9a51e8ae6973801f63a15"
+"@ciscospark/media-engine-webrtc@1.23.1":
+  version "1.23.1"
+  resolved "https://registry.yarnpkg.com/@ciscospark/media-engine-webrtc/-/media-engine-webrtc-1.23.1.tgz#6b7bed1b25f0d44125d04077b1fef2a02b2c849a"
   dependencies:
-    "@ciscospark/common" "1.21.1"
-    "@ciscospark/common-evented" "1.21.1"
+    "@ciscospark/common" "1.21.4"
+    "@ciscospark/common-evented" "1.21.4"
     ampersand-events "^2.0.2"
     babel-runtime "^6.23.0"
     core-decorators "^0.14.0"
@@ -121,65 +122,66 @@
     sdp-transform "^2.3.0"
     webrtc-adapter "^6.0.1"
 
-"@ciscospark/plugin-authorization-browser@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/plugin-authorization-browser/-/plugin-authorization-browser-1.21.1.tgz#fdebb47ae1448d91b6aa13b44ab6dffbf5f42ff0"
+"@ciscospark/plugin-authorization-browser@1.23.0":
+  version "1.23.0"
+  resolved "https://registry.yarnpkg.com/@ciscospark/plugin-authorization-browser/-/plugin-authorization-browser-1.23.0.tgz#597613a67254cbd993a4f05a6cafb2a0e9649211"
   dependencies:
-    "@ciscospark/common" "1.21.1"
-    "@ciscospark/internal-plugin-wdm" "1.21.1"
-    "@ciscospark/spark-core" "1.21.1"
+    "@ciscospark/common" "1.21.4"
+    "@ciscospark/internal-plugin-wdm" "1.23.0"
+    "@ciscospark/spark-core" "1.21.4"
     babel-runtime "^6.23.0"
     envify "^3.4.1"
     lodash "^4.17.4"
     uuid "^3.0.1"
 
-"@ciscospark/plugin-authorization-node@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/plugin-authorization-node/-/plugin-authorization-node-1.21.1.tgz#53a8279ee6cea2fcf991cd680ad9dc9ed8898971"
+"@ciscospark/plugin-authorization-node@1.23.0":
+  version "1.23.0"
+  resolved "https://registry.yarnpkg.com/@ciscospark/plugin-authorization-node/-/plugin-authorization-node-1.23.0.tgz#5c0ae1bd5ed36705618a4ff92f70e3fe8c618af3"
   dependencies:
-    "@ciscospark/common" "1.21.1"
-    "@ciscospark/internal-plugin-wdm" "1.21.1"
-    "@ciscospark/spark-core" "1.21.1"
+    "@ciscospark/common" "1.21.4"
+    "@ciscospark/internal-plugin-wdm" "1.23.0"
+    "@ciscospark/spark-core" "1.21.4"
     babel-runtime "^6.23.0"
     envify "^3.4.1"
 
-"@ciscospark/plugin-authorization@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/plugin-authorization/-/plugin-authorization-1.21.1.tgz#2b5565b537f939eb47fc326196a549e9b51c2a0d"
+"@ciscospark/plugin-authorization@1.23.0":
+  version "1.23.0"
+  resolved "https://registry.yarnpkg.com/@ciscospark/plugin-authorization/-/plugin-authorization-1.23.0.tgz#68d48471273310d0e020199995cf266ce6ed295f"
   dependencies:
-    "@ciscospark/plugin-authorization-browser" "1.21.1"
-    "@ciscospark/plugin-authorization-node" "1.21.1"
+    "@ciscospark/plugin-authorization-browser" "1.23.0"
+    "@ciscospark/plugin-authorization-node" "1.23.0"
     envify "^3.4.1"
 
-"@ciscospark/plugin-logger@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/plugin-logger/-/plugin-logger-1.21.1.tgz#9ba83833cb7455949850f678788fc5230a580153"
+"@ciscospark/plugin-logger@1.21.4":
+  version "1.21.4"
+  resolved "https://registry.yarnpkg.com/@ciscospark/plugin-logger/-/plugin-logger-1.21.4.tgz#daf89e6e3721ab83f8c6ec753bf48e7f9745df14"
   dependencies:
-    "@ciscospark/common" "1.21.1"
-    "@ciscospark/spark-core" "1.21.1"
+    "@ciscospark/common" "1.21.4"
+    "@ciscospark/spark-core" "1.21.4"
     babel-runtime "^6.23.0"
     envify "^3.4.1"
     lodash "^4.17.4"
 
-"@ciscospark/plugin-people@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/plugin-people/-/plugin-people-1.21.1.tgz#38d32b5d62a46d1b6c1b729bf48a46778541aad6"
+"@ciscospark/plugin-people@1.21.4":
+  version "1.21.4"
+  resolved "https://registry.yarnpkg.com/@ciscospark/plugin-people/-/plugin-people-1.21.4.tgz#bf3fe348be1b180d742c8b1aa99d116c10ea5712"
   dependencies:
-    "@ciscospark/common" "1.21.1"
-    "@ciscospark/spark-core" "1.21.1"
+    "@ciscospark/common" "1.21.4"
+    "@ciscospark/spark-core" "1.21.4"
     babel-runtime "^6.23.0"
     envify "^3.4.1"
 
-"@ciscospark/plugin-phone@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/plugin-phone/-/plugin-phone-1.21.1.tgz#eb14ae5a3045ebfb6facc7f6ec7067b3de73868a"
+"@ciscospark/plugin-phone@1.23.3":
+  version "1.23.3"
+  resolved "https://registry.yarnpkg.com/@ciscospark/plugin-phone/-/plugin-phone-1.23.3.tgz#700698be47aecd8e6da915721add80eee44fdd7f"
   dependencies:
-    "@ciscospark/common" "1.21.1"
-    "@ciscospark/internal-plugin-locus" "1.21.1"
-    "@ciscospark/internal-plugin-metrics" "1.21.1"
-    "@ciscospark/media-engine-webrtc" "1.21.1"
-    "@ciscospark/plugin-people" "1.21.1"
-    "@ciscospark/spark-core" "1.21.1"
+    "@ciscospark/common" "1.21.4"
+    "@ciscospark/common-timers" "1.21.4"
+    "@ciscospark/internal-plugin-locus" "1.23.2"
+    "@ciscospark/internal-plugin-metrics" "1.23.0"
+    "@ciscospark/media-engine-webrtc" "1.23.1"
+    "@ciscospark/plugin-people" "1.21.4"
+    "@ciscospark/spark-core" "1.21.4"
     ampersand-collection "^2.0.0"
     ampersand-collection-lodash-mixin "^4.0.0"
     ampersand-state "^5.0.2"
@@ -190,13 +192,13 @@
     sdp-transform "^2.3.0"
     uuid "^3.0.1"
 
-"@ciscospark/spark-core@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/spark-core/-/spark-core-1.21.1.tgz#14fe186e659169dd72bf773a39e69ff3b34d5c26"
+"@ciscospark/spark-core@1.21.4":
+  version "1.21.4"
+  resolved "https://registry.yarnpkg.com/@ciscospark/spark-core/-/spark-core-1.21.4.tgz#817032f2bcfbeea9b68f13886bfa9828b93798dc"
   dependencies:
-    "@ciscospark/common" "1.21.1"
-    "@ciscospark/common-timers" "1.21.1"
-    "@ciscospark/http-core" "1.21.1"
+    "@ciscospark/common" "1.21.4"
+    "@ciscospark/common-timers" "1.21.4"
+    "@ciscospark/http-core" "1.21.4"
     ampersand-collection "^2.0.0"
     ampersand-events "^2.0.2"
     ampersand-state "^5.0.2"
@@ -205,11 +207,11 @@
     lodash "^4.17.4"
     uuid "^3.0.1"
 
-"@ciscospark/storage-adapter-local-storage@1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@ciscospark/storage-adapter-local-storage/-/storage-adapter-local-storage-1.21.1.tgz#44356bb1d5d84ebca3416776e3142b58416034a9"
+"@ciscospark/storage-adapter-local-storage@1.21.4":
+  version "1.21.4"
+  resolved "https://registry.yarnpkg.com/@ciscospark/storage-adapter-local-storage/-/storage-adapter-local-storage-1.21.4.tgz#06a60e319a61e74b1075e67d7c9bc20822a77481"
   dependencies:
-    "@ciscospark/spark-core" "1.21.1"
+    "@ciscospark/spark-core" "1.21.4"
     babel-runtime "^6.23.0"
     envify "^3.4.1"
 
@@ -434,9 +436,13 @@ acorn@^4.0.3, acorn@^4.0.4:
   version "4.0.13"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-4.0.13.tgz#105495ae5361d697bd195c825192e1ad7f253787"
 
-acorn@^5.0.0, acorn@^5.2.1:
+acorn@^5.0.0:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.2.1.tgz#317ac7821826c22c702d66189ab8359675f135d7"
+
+acorn@^5.2.1:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.3.0.tgz#7446d39459c54fb49a80e6ee6478149b940ec822"
 
 address@1.0.3, address@^1.0.1:
   version "1.0.3"
@@ -470,9 +476,18 @@ ajv@^4.9.1:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
 
-ajv@^5.0.0, ajv@^5.1.0, ajv@^5.1.5, ajv@^5.2.0, ajv@^5.2.3:
+ajv@^5.0.0, ajv@^5.1.5, ajv@^5.2.0, ajv@^5.2.3:
   version "5.5.1"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.5.1.tgz#b38bb8876d9e86bee994956a04e721e88b248eb2"
+  dependencies:
+    co "^4.6.0"
+    fast-deep-equal "^1.0.0"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.3.0"
+
+ajv@^5.1.0:
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.5.2.tgz#73b5eeca3fab653e3d3f9422b341ad42205dc965"
   dependencies:
     co "^4.6.0"
     fast-deep-equal "^1.0.0"
@@ -509,8 +524,8 @@ ampersand-collection-lodash-mixin@^4.0.0:
     lodash "^4.6.1"
 
 ampersand-collection@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/ampersand-collection/-/ampersand-collection-2.0.1.tgz#41ce5b81fc075949cab229fffddb8d9cfbb533cc"
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/ampersand-collection/-/ampersand-collection-2.0.2.tgz#7e19374f677b9abd1e2e977a784566a8f7b15302"
   dependencies:
     ampersand-class-extend "^2.0.0"
     ampersand-events "^2.0.1"
@@ -540,6 +555,10 @@ ampersand-version@^1.0.0, ampersand-version@^1.0.2:
   dependencies:
     find-root "^0.1.1"
     through2 "^0.6.3"
+
+animate.css@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/animate.css/-/animate.css-3.5.2.tgz#91e668dc069a808e5e499514867b97aae0166c36"
 
 ansi-align@^1.1.0:
   version "1.1.0"
@@ -2201,16 +2220,16 @@ circular-json@^0.3.1:
   resolved "https://registry.yarnpkg.com/circular-json/-/circular-json-0.3.3.tgz#815c99ea84f6809529d2f45791bdf82711352d66"
 
 ciscospark@^1.20.0:
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/ciscospark/-/ciscospark-1.21.1.tgz#8647a98f0e553e71cf5fa28e28771182dafa122e"
+  version "1.23.3"
+  resolved "https://registry.yarnpkg.com/ciscospark/-/ciscospark-1.23.3.tgz#52b836349a4e5b6dd582c35cc791fb3d656abf9c"
   dependencies:
-    "@ciscospark/internal-plugin-wdm" "1.21.1"
-    "@ciscospark/plugin-authorization" "1.21.1"
-    "@ciscospark/plugin-logger" "1.21.1"
-    "@ciscospark/plugin-people" "1.21.1"
-    "@ciscospark/plugin-phone" "1.21.1"
-    "@ciscospark/spark-core" "1.21.1"
-    "@ciscospark/storage-adapter-local-storage" "1.21.1"
+    "@ciscospark/internal-plugin-wdm" "1.23.0"
+    "@ciscospark/plugin-authorization" "1.23.0"
+    "@ciscospark/plugin-logger" "1.21.4"
+    "@ciscospark/plugin-people" "1.21.4"
+    "@ciscospark/plugin-phone" "1.23.3"
+    "@ciscospark/spark-core" "1.21.4"
+    "@ciscospark/storage-adapter-local-storage" "1.21.4"
     babel-polyfill "^6.23.0"
     babel-runtime "^6.23.0"
     envify "^3.4.1"
@@ -2331,9 +2350,13 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@2.12.x, commander@^2.12.1, commander@^2.5.0, commander@^2.9.0, commander@~2.12.1:
+commander@2.12.x, commander@^2.12.1, commander@^2.9.0, commander@~2.12.1:
   version "2.12.2"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.12.2.tgz#0f5946c427ed9ec0d91a46bb9def53e54650e555"
+
+commander@^2.5.0:
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.13.0.tgz#6964bca67685df7c1f1430c584f07d7597885b9c"
 
 common-tags@^1.5.1:
   version "1.5.1"
@@ -2493,11 +2516,11 @@ core-js@^1.0.0:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
 
-core-js@^2.4.0:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.2.tgz#bc4648656e7dc9dc80d7d3c7bbc172d96e744e63"
+core-js@^2.4.0, core-js@^2.5.0:
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.3.tgz#8acc38345824f16d8365b7c9b4259168e8ed603e"
 
-core-js@^2.4.1, core-js@^2.5.0, core-js@^2.5.1:
+core-js@^2.4.1, core-js@^2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.1.tgz#ae6874dc66937789b80754ff5428df66819ca50b"
 
@@ -2896,8 +2919,8 @@ detect-port-alt@1.1.3:
     debug "^2.6.0"
 
 detective@^4.3.1:
-  version "4.7.0"
-  resolved "https://registry.yarnpkg.com/detective/-/detective-4.7.0.tgz#6276e150f9e50829ad1f90ace4d9a2304188afcf"
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/detective/-/detective-4.7.1.tgz#0eca7314338442febb6d65da54c10bb1c82b246e"
   dependencies:
     acorn "^5.2.1"
     defined "^1.0.0"
@@ -2954,9 +2977,13 @@ dom-converter@~0.1:
   dependencies:
     utila "~0.3"
 
-dom-helpers@^3.2.0, dom-helpers@^3.2.1:
+dom-helpers@^3.2.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.2.1.tgz#3203e07fed217bd1f424b019735582fc37b2825a"
+
+dom-helpers@^3.2.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.3.1.tgz#fc1a4e15ffdf60ddde03a480a9c0fece821dd4a6"
 
 dom-serializer@0:
   version "0.1.0"
@@ -3746,6 +3773,10 @@ forever-agent@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
 
+form-data-to-object@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/form-data-to-object/-/form-data-to-object-0.2.0.tgz#f7a8e68ddd910a1100a65e25ac6a484143ff8168"
+
 form-data@^2.3.1, form-data@~2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.3.1.tgz#6fb94fbd71885306d73d15cc497fe4cc4ecd44bf"
@@ -3765,6 +3796,19 @@ form-data@~2.1.1:
 formidable@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/formidable/-/formidable-1.1.1.tgz#96b8886f7c3c3508b932d6bd70c4d3a88f35f1a9"
+
+formsy-material-ui@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/formsy-material-ui/-/formsy-material-ui-0.6.3.tgz#1b2032961e1b15a022a74f139f1b5dfe94d44d79"
+  dependencies:
+    keycode "^2.1.9"
+
+formsy-react@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/formsy-react/-/formsy-react-1.1.2.tgz#dc3e84263d6561d672b5d0903196b71014a4c8fd"
+  dependencies:
+    form-data-to-object "^0.2.0"
+    prop-types "^15.5.10"
 
 forwarded@~0.1.2:
   version "0.1.2"
@@ -4351,8 +4395,8 @@ ignore@^3.3.3:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.7.tgz#612289bfb3c220e186a58118618d5be8c1bab021"
 
 immutability-helper@^2.4.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-2.6.0.tgz#3e909d1baf915765a9624545198d04c55a80bdd7"
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-2.6.4.tgz#a931aef97257fcb6d2b5456de652ab6e3bba8408"
   dependencies:
     invariant "^2.2.0"
 
@@ -4603,12 +4647,6 @@ is-number@^3.0.0:
 is-obj@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/is-obj/-/is-obj-1.0.1.tgz#3e4729ac1f5fde025cd7d83a896dab9f4f67db0f"
-
-is-observable@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/is-observable/-/is-observable-0.2.0.tgz#b361311d83c6e5d726cabf5e250b0237106f5ae2"
-  dependencies:
-    symbol-observable "^0.2.2"
 
 is-path-cwd@^1.0.0:
   version "1.0.0"
@@ -5154,21 +5192,17 @@ jss-default-unit@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/jss-default-unit/-/jss-default-unit-7.0.0.tgz#176c1db91da870e3ad16301f6f4b4cfc6fe1e90a"
 
-jss-default-unit@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/jss-default-unit/-/jss-default-unit-8.0.0.tgz#a308ead4f587ebe17cc845f9870867400de90910"
-  dependencies:
-    is-observable "^0.2.0"
+jss-default-unit@^8.0.0, jss-default-unit@^8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/jss-default-unit/-/jss-default-unit-8.0.2.tgz#cc1e889bae4c0b9419327b314ab1c8e2826890e6"
 
 jss-expand@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/jss-expand/-/jss-expand-4.0.1.tgz#e8c50e0ac42e7feb6dcaf01212f6607193c1ae80"
 
 jss-expand@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/jss-expand/-/jss-expand-5.0.0.tgz#8eadb782f29ec5f1d285451dd38052d5ac51644a"
-  dependencies:
-    is-observable "^0.2.0"
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/jss-expand/-/jss-expand-5.1.0.tgz#b1ad74ec18631f34f65a2124fcfceb6400610e3d"
 
 jss-extend@^5.0.0:
   version "5.0.0"
@@ -5177,10 +5211,9 @@ jss-extend@^5.0.0:
     warning "^3.0.0"
 
 jss-extend@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/jss-extend/-/jss-extend-6.0.1.tgz#e53430bc92a42e50d036883ccfecfbc4e1199147"
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/jss-extend/-/jss-extend-6.1.0.tgz#85f3d39944018e8f44b322c14fa316068aa7bb0b"
   dependencies:
-    is-observable "^0.2.0"
     warning "^3.0.0"
 
 jss-global@^2.0.0:
@@ -5266,11 +5299,11 @@ jss@^8.1.0:
     warning "^3.0.0"
 
 jss@^9.3.2, jss@^9.3.3:
-  version "9.3.3"
-  resolved "https://registry.yarnpkg.com/jss/-/jss-9.3.3.tgz#d535ad8c64f6df9aeadb0219d5153c47493ff1c0"
+  version "9.5.1"
+  resolved "https://registry.yarnpkg.com/jss/-/jss-9.5.1.tgz#c869f38cdc44a32f4425fe007ea46b8891536326"
   dependencies:
     is-in-browser "^1.1.3"
-    symbol-observable "^1.0.4"
+    symbol-observable "^1.1.0"
     warning "^3.0.0"
 
 jstransform@^11.0.3:
@@ -5590,8 +5623,8 @@ material-ui-icons@^1.0.0-beta.17:
     recompose "^0.26.0"
 
 material-ui@^1.0.0-beta.18:
-  version "1.0.0-beta.23"
-  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-1.0.0-beta.23.tgz#f3d49359c13b57f893e768de62b81f5e8ad7faa5"
+  version "1.0.0-beta.27"
+  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-1.0.0-beta.27.tgz#f3073b7acffebd1fc6d0339a3260d4555445daf7"
   dependencies:
     babel-runtime "^6.26.0"
     brcast "^3.0.1"
@@ -5600,13 +5633,17 @@ material-ui@^1.0.0-beta.18:
     dom-helpers "^3.2.1"
     hoist-non-react-statics "^2.3.1"
     jss "^9.3.3"
-    jss-preset-default "^4.0.1"
+    jss-camel-case "^6.0.0"
+    jss-default-unit "^8.0.2"
+    jss-global "^3.0.0"
+    jss-nested "^6.0.1"
+    jss-props-sort "^6.0.0"
+    jss-vendor-prefixer "^7.0.0"
     keycode "^2.1.9"
-    lodash "^4.17.4"
+    lodash "^4.2.0"
     normalize-scroll-left "^0.1.2"
     prop-types "^15.6.0"
     react-event-listener "^0.5.1"
-    react-flow-types "^0.2.0-beta.6"
     react-jss "^8.1.0"
     react-popper "^0.7.4"
     react-scrollbar-size "^2.0.2"
@@ -6389,8 +6426,8 @@ podda@^1.2.2:
     immutable "^3.8.1"
 
 popper.js@^1.12.5:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.13.0.tgz#e1e7ff65cc43f7cf9cf16f1510a75e81f84f4565"
+  version "1.12.9"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.9.tgz#0dfbc2dff96c451bb332edcfcfaaf566d331d5b3"
 
 portfinder@^1.0.9:
   version "1.0.13"
@@ -6988,8 +7025,8 @@ react-error-overlay@^3.0.0:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
 
 react-event-listener@^0.5.0, react-event-listener@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/react-event-listener/-/react-event-listener-0.5.1.tgz#ba36076e47bc37c5a67ff5ccd4a9ff0f15621040"
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/react-event-listener/-/react-event-listener-0.5.3.tgz#a8b492596ad601865314fcc2c18cb87b6ce3876e"
   dependencies:
     babel-runtime "^6.26.0"
     fbjs "^0.8.16"
@@ -7001,10 +7038,6 @@ react-event-timeline@^1.3.6:
   resolved "https://registry.yarnpkg.com/react-event-timeline/-/react-event-timeline-1.4.1.tgz#8c4c058e71e249c65725bdfcff3297fb6e7c14a4"
   dependencies:
     prop-types "^15.6.0"
-
-react-flow-types@^0.2.0-beta.6:
-  version "0.2.0-beta.6"
-  resolved "https://registry.yarnpkg.com/react-flow-types/-/react-flow-types-0.2.0-beta.6.tgz#bf49c8b7864fcd0951b03286c63a80d66ce9fae4"
 
 react-ga@^2.3.5:
   version "2.3.5"
@@ -7046,14 +7079,14 @@ react-jss@^7.2.0:
     theming "^1.1.0"
 
 react-jss@^8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/react-jss/-/react-jss-8.1.0.tgz#7eefe3d121d31d5650118fc4f6b119e388cd43ba"
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/react-jss/-/react-jss-8.2.1.tgz#b2905063ba8b950f095a139a75232d851c79e15e"
   dependencies:
     hoist-non-react-statics "^2.3.1"
     jss "^9.3.2"
     jss-preset-default "^4.0.1"
     prop-types "^15.6.0"
-    theming "^1.2.1"
+    theming "^1.3.0"
 
 react-markdown@^2.5.0:
   version "2.5.1"
@@ -7072,8 +7105,8 @@ react-modal@^3.1.4:
     warning "^3.0.0"
 
 react-popper@^0.7.4:
-  version "0.7.4"
-  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.7.4.tgz#8649d539837e7c6f47bc9b24c9cf57a404e199a1"
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.7.5.tgz#71c25946f291db381231281f6b95729e8b801596"
   dependencies:
     popper.js "^1.12.5"
     prop-types "^15.5.10"
@@ -7566,8 +7599,8 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     inherits "^2.0.1"
 
 rtcpeerconnection-shim@^1.1.13:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/rtcpeerconnection-shim/-/rtcpeerconnection-shim-1.2.2.tgz#67511fafe4fcacf2bc357198f6bc1eede7a7ef46"
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/rtcpeerconnection-shim/-/rtcpeerconnection-shim-1.2.5.tgz#bfbae97e265ad05377e6fed1cfcb7f5880ce6000"
   dependencies:
     sdp "^2.2.0"
 
@@ -7646,8 +7679,8 @@ scss-tokenizer@^0.2.3:
     source-map "^0.4.2"
 
 sdp-transform@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/sdp-transform/-/sdp-transform-2.3.0.tgz#57a9575942041d8577a869d7c74d4c3a0bd888f6"
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/sdp-transform/-/sdp-transform-2.3.1.tgz#ac68f6e2f87a3144919affb59b42a2ae4cfc38f7"
 
 sdp@^2.2.0, sdp@^2.3.0:
   version "2.5.0"
@@ -8162,11 +8195,7 @@ sw-toolbox@^3.4.0:
     path-to-regexp "^1.0.1"
     serviceworker-cache-polyfill "^4.0.0"
 
-symbol-observable@^0.2.2:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-0.2.4.tgz#95a83db26186d6af7e7a18dbd9760a2f86d08f40"
-
-symbol-observable@^1.0.3, symbol-observable@^1.0.4:
+symbol-observable@^1.0.3, symbol-observable@^1.0.4, symbol-observable@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.1.0.tgz#5c68fd8d54115d9dfb72a84720549222e8db9b32"
 
@@ -8224,9 +8253,18 @@ text-table@0.2.0, text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
 
-theming@^1.1.0, theming@^1.2.1:
+theming@^1.1.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/theming/-/theming-1.2.1.tgz#3de0be696339c6c203013a6c68d1c1057973dc44"
+  dependencies:
+    brcast "^3.0.1"
+    is-function "^1.0.1"
+    is-plain-object "^2.0.1"
+    prop-types "^15.5.8"
+
+theming@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/theming/-/theming-1.3.0.tgz#286d5bae80be890d0adc645e5ca0498723725bdc"
   dependencies:
     brcast "^3.0.1"
     is-function "^1.0.1"
@@ -8548,6 +8586,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "~1.0.0"
     spdx-expression-parse "~1.0.0"
 
+validator@^9.2.0:
+  version "9.2.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-9.2.0.tgz#ad216eed5f37cac31a6fe00ceab1f6b88bded03e"
+
 value-equal@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/value-equal/-/value-equal-0.4.0.tgz#c5bdd2f54ee093c04839d71ce2e4758a6890abc7"
@@ -8742,8 +8784,8 @@ webpack@^3.8.1:
     yargs "^8.0.2"
 
 webrtc-adapter@^6.0.1:
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/webrtc-adapter/-/webrtc-adapter-6.0.3.tgz#850ab1649099922086c2c038c87c10c46d0c42cc"
+  version "6.0.4"
+  resolved "https://registry.yarnpkg.com/webrtc-adapter/-/webrtc-adapter-6.0.4.tgz#fb0b77a742952bd26fe9d8264c872d72c2e8b982"
   dependencies:
     rtcpeerconnection-shim "^1.1.13"
     sdp "^2.3.0"

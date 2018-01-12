@@ -26,6 +26,7 @@ class Store {
         }
       }
     });
+    window.ciscospark = this.api;
     this.api.once('ready', async () => {
       if (this.api.canAuthorize) {
         this.authenticated = true;

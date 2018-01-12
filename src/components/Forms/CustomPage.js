@@ -10,6 +10,7 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { MenuItem } from 'material-ui/Menu';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import Select from 'material-ui/Select';
+import validator from 'validator';
 
 const styles = theme => ({
   textField: {
@@ -50,20 +51,34 @@ class CustomPage extends PureComponent {
       baseUrl: '',
       callString: '',
       sipCall: true,
+      widget: false,
       mayday: true,
+      formValid: false,
+      uriValid: true,
+      urlValid: true,
       callSize: '25%',
     }
   }
 
   handleChange = name => event => {
+    if (name === "baseUrl") {
+      let bool = validator.isURL(event.target.value, {require_protocol: true});
+      bool? this.setState({urlValid: true}) : this.setState({urlValid: false});
+      bool && this.state.uriValid && this.state.callString && this.setState({formValid: true});
+    }
+    else if (name === "callString") {
+      let bool = validator.isEmail(event.target.value) 
+      bool? this.setState({uriValid: true}) : this.setState({uriValid: false});
+      bool && this.state.urlValid && this.state.baseUrl && this.setState({formValid: true});
+    }
     this.setState({
       [name]: event.target.value
     });
   };
 
   handlePage = event => {
-    let temp = this.state;
-    if (this.state.sipCall) {
+    let temp = { ...this.state };
+    if (this.state.sipCall && !this.state.widget) {
       temp.callString = `sip:${this.state.callString}`;
     }
     this.props.onSubmit(temp, event);
@@ -81,22 +96,26 @@ class CustomPage extends PureComponent {
         <Item flex='1 1 60%'>
           <TextField
             required
-            id="required"
+            id="URL"
             label="Branding Website URL"
             margin="normal"
+            error={!this.state.urlValid}
             placeholder='https://www.cisco.com/'
             helperText='(Enter Full URL)'
+            type="url"
             className={classes.textField}
             fullWidth={true}
             onChange={this.handleChange('baseUrl')}
           />
           <TextField
             required
-            id="required"
+            id="URI"
+            error={!this.state.uriValid}
             label="Spark or URI Calling Address"
             placeholder='roomkit@sparkdemos.com'
             helperText='(eg. user@domain.com)'
             margin="normal"
+            type="email"
             className={classes.textField}
             fullWidth={true}
             onChange={this.handleChange('callString')}
@@ -121,7 +140,7 @@ class CustomPage extends PureComponent {
           </FormControl>
         </Item>
         <Item flex='1 1 40%'>
-          <FormGroup>
+          {!this.state.widget && (<FormGroup>
             <FormControlLabel
               control={
                 <Switch
@@ -130,20 +149,20 @@ class CustomPage extends PureComponent {
                   aria-label="Sip Call"
                 />}
               label={this.state.sipCall ? 'SIP Call' : 'Spark Call'} />
-          </FormGroup>
+          </FormGroup>)}
           <FormGroup>
             <FormControlLabel
               control={
                 <Switch
-                  checked={this.state.mayday}
-                  onChange={this.handleSwitch('mayday')}
-                  aria-label="Mayday Button"
+                  checked={this.state.widget}
+                  onChange={this.handleSwitch('widget')}
+                  aria-label="Widget Mode"
                 />}
-              label='Mayday' />
+              label={this.state.widget ? 'Widget' : 'SDK'} />
           </FormGroup>
         </Item>
         <Item flex='0 0 100%'>
-          <Button color='primary' className={classes.button} 
+          <Button color='primary' disabled={!this.state.formValid} type="submit" className={classes.button}
             raised onClick={this.handlePage}>
             Run
         </Button>
