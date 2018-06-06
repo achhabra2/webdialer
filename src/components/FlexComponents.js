@@ -1,5 +1,19 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import prefix from 'react-prefixer';
+
+const containerStyle = {
+  flexDirection: 'column',
+  alignItems: 'baseline',
+  alignContent: 'flex-start',
+  width: 'auto',
+  textAlign: 'center',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
+  alignItems: 'stretch',
+  alignContent: 'stretch',
+  zIndex: 1
+};
 
 class Container extends PureComponent {
   static propTypes = {
@@ -20,7 +34,7 @@ class Container extends PureComponent {
       border: 'none',
     };
 
-    const merged = Object.assign({}, template, style);
+    const merged = prefix(Object.assign({}, template, style));
 
     let ComponentProp = component;
 
@@ -48,19 +62,19 @@ class Item extends PureComponent {
   }
 
   render() {
-    const { 
-      style, 
-      className, 
-      component, 
-      padding, 
-      children, 
-      flex, 
-      border, 
-      position, 
-      alignSelf, 
+    const {
+      style,
+      className,
+      component,
+      padding,
+      children,
+      flex,
+      border,
+      position,
+      alignSelf,
       textAlign,
       minWidth,
-      ...other 
+      ...other
     } = this.props;
 
     const template = {

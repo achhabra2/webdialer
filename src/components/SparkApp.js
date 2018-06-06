@@ -11,6 +11,9 @@ import DevTools from 'mobx-react-devtools'
 import BrandPage from './BrandPage';
 import AuthPage from './AuthPage';
 import CarePage from './CarePage';
+import CLEUPage from './CLEUPage';
+import NotFound from './404Page';
+import './Widget.css';
 
 const rootStyle = {
   textAlign: 'center'
@@ -18,18 +21,17 @@ const rootStyle = {
 
 
 class SparkApp extends Component {
-
   componentDidMount() {
     let aScript = document.createElement('script');
     aScript.type = 'text/javascript';
-    aScript.src = "https://code.s4d.io/widget-space/production/bundle.js";
+    aScript.src = "https://code.s4d.io/widget-space/latest/bundle.js";
     document.head.appendChild(aScript);
     let css = document.createElement('link');
-    css.rel="stylesheet";
-    css.href="https://code.s4d.io/widget-space/production/main.css"
+    css.rel = "stylesheet";
+    css.href = "https://code.s4d.io/widget-space/latest/main.css"
     document.head.appendChild(css);
   }
-  
+
   render() {
     const { store, location } = this.props;
     return (
@@ -39,6 +41,7 @@ class SparkApp extends Component {
         <Switch>
           <PrivateRoute authenticated={store.authenticated} path="/call" component={CallPage} />
           <PrivateRoute authenticated={store.authenticated} path="/custom" component={SubPage} />
+          <PrivateRoute authenticated={store.authenticated} path='/cleu' component={CLEUPage} />
           <Route path='/auth' component={AuthPage} />
           <Route path='/about' component={About} />
           <Route path='/brand' component={BrandPage} />
@@ -50,6 +53,7 @@ class SparkApp extends Component {
               state: { from: props.location }
             }} />
           )} />
+          <Route path="*" component={NotFound} />
         </Switch>
       </div>
     )

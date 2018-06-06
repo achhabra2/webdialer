@@ -2,7 +2,7 @@ import { observable, computed, action } from 'mobx';
 import Spark from 'ciscospark';
 
 let public_address;
-process.env.NODE_ENV == 'production' ? public_address = 'https://webdialer.chhab.rocks/auth' : public_address = 'http://localhost:3000/auth';
+process.env.NODE_ENV == 'production' ? public_address = `https://${window.location.host}/auth` : public_address = 'http://localhost:3000/auth';
 
 let redirectUri = '&redirect_uri=' + encodeURIComponent(public_address);
 

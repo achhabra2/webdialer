@@ -51,8 +51,8 @@ const styles = theme => ({
   },
   overlayStyle: {
     position: 'absolute',
-    right: '0px',
-    top: '0px',
+    right: '15px',
+    top: '15px',
     margin: '10px',
     // width: '25%',
   },
@@ -87,6 +87,7 @@ class SubPage extends Component {
       config: false,
       mayday: false,
       callString: '',
+      spaceString: '',
       callSize: '25%',
       widget: false,
     };
@@ -136,6 +137,7 @@ class SubPage extends Component {
     this.setState(state => ({
       baseUrl: config.baseUrl,
       callString: config.callString,
+      spaceString: config.spaceString,
       mayday: config.mayday,
       callSize: config.callSize || '25%',
       widget: config.widget,
@@ -154,7 +156,7 @@ class SubPage extends Component {
 
   render() {
     const { classes } = this.props;
-    const { mayday, callString, loading, config } = this.state;
+    const { mayday, callString, loading, config, spaceString } = this.state;
 
     return (
       <div className={classes.root} >
@@ -179,17 +181,15 @@ class SubPage extends Component {
           <div className={loading ? classes.hidden : classes.flexItem}>
             <img onLoad={this.stopLoading} onError={this.handleError} alt='' src={ciscoImg} width='100%'
               ref={(input) => { this.imgInput = input; }} />
-            {!this.state.widget ?
-              (<CallContainer
-                mayday={mayday}
-                callString={callString}
-                className={classes.overlayStyle}
-                style={{ width: this.state.callSize }}
-              />)
-              :
-              (
-                <WidgetContainer size={this.state.callSize} className={classes.overlayStyle} data={{ toPersonEmail: callString }} />
-              )}
+            <CallContainer
+              mayday={mayday}
+              callString={callString}
+              spaceString={spaceString}
+              className={classes.overlayStyle}
+              style={{ width: this.state.callSize }}
+              widgetSize={this.state.callSize}
+              widget={this.state.widget}
+            />
           </div>
         )}
       </div>

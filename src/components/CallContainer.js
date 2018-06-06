@@ -4,7 +4,6 @@ import { inject, observer } from 'mobx-react';
 import update from 'immutability-helper';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
 import { CircularProgress } from 'material-ui/Progress';
 import VideoControls from './VideoControls';
 import Dialer from './Dialer';
@@ -13,6 +12,7 @@ import IncomingToast from './IncomingToast';
 import Draggable from 'react-draggable';
 import ReactGA from 'react-ga';
 import WidgetContainer from './WidgetContainer';
+
 
 const styles = theme => ({
   container: {
@@ -30,12 +30,13 @@ const styles = theme => ({
     // verticalAlign: 'middle',
   },
   root: theme.mixins.gutters({
-    paddingTop: 5,
-    paddingBottom: 5,
-    marginTop: theme.spacing.unit * 1,
+    paddingTop: 2,
+    paddingBottom: 2,
+    margin: 'auto',
   }),
   hidden: {
-    visibility: 'hidden'
+    display: 'none'
+    // visibility: 'hidden'
   },
   draggable: {
     visibility: 'visible'
@@ -45,13 +46,33 @@ const styles = theme => ({
 @inject('store') @observer
 class CallContainer extends Component {
 
+  static defaultProps = {
+    widgetSize: '90%',
+    onCallConnected() {
+      console.log('Call Connected Event')
+    },
+    onCallDisconnected() {
+      console.log('Call Disconnected Event')
+    }
+  }
+
+  static propTypes = {
+    callString: PropTypes.string,
+    spaceString: PropTypes.string,
+    mayday: PropTypes.bool,
+    widget: PropTypes.bool,
+    onCallConnected: PropTypes.func,
+    onCallDisconnected: PropTypes.func
+  }
+
   constructor(props) {
     super(props);
     this.call = {};
     this.state = {
       loading: false,
       incomingCall: false,
-      callString: this.props.callString || '',
+      uriString: this.props.callString || '',
+      spaceString: this.props.spaceString || '',
       callActive: false,
       callState: {
         audioMuted: false,
@@ -87,7 +108,9 @@ class CallContainer extends Component {
       });
     }
     if (this.props.immediate && this.props.callString)
-      this.placeCall(this.props.callString)
+      this.placeCall({ callString: this.props.callString, widget: false })
+    if (this.props.immediate && this.props.spaceString)
+      this.placeCall({ spaceString: this.props.spaceString, widget: true })
   }
 
 
@@ -109,15 +132,26 @@ class CallContainer extends Component {
   }
 
   handleHangUp = e => {
-    this.call.hangup();
+    !this.state.widget && this.call.hangup();
     this.setState({
       callActive: false
+      // widget: false,
+      // callString: ''
     });
     ReactGA.event({
       category: 'Call',
       action: 'Ended'
     });
+    this.props.onCallDisconnected();
   }
+
+  // onWidgetClose = e => {
+  //   this.setState({
+  //     callActive: false,
+  //     widget: false,
+  //     callString: ''
+  //   });
+  // }
 
   handleMute = e => {
     this.call.toggleSendingAudio();
@@ -148,15 +182,16 @@ class CallContainer extends Component {
       category: 'Call',
       action: 'Placed'
     });
-    const { callString, widget } = options;
+    this.props.onCallConnected();
+    const { callString = '', spaceString, widget } = options;
     if (widget) {
-      this.setState({ widget: true, callString: callString, loading: false, callActive: true });
+      this.setState({ widget: true, uriString: callString, spaceString: spaceString, loading: false, callActive: true });
     }
     else {
       let incomingVideo = this.incomingVideo;
       let outgoingVideo = this.outgoingVideo;
       this.call = this.props.store.api.phone.dial(callString);
-      this.setState(state => ({ loading: true }));
+      this.setState(state => ({ loading: true, widget: false }));
       this.call.on('active', () => {
         console.log('Call Active');
         this.setState(state => ({ loading: false, callActive: true }));
@@ -175,30 +210,42 @@ class CallContainer extends Component {
   }
 
   render() {
-    const { classes } = this.props;
-    const { loading, callActive, incomingCall, mayday, callString, widget } = this.state;
+    const { classes, callString } = this.props;
+    const { loading, callActive, incomingCall, mayday, widget, uriString, spaceString } = this.state;
     return (
       <div className={this.props.className} style={this.props.style}>
-        {loading && <div className={classes.progress}> <CircularProgress size={80} color='accent' /> </div>}
-        {!callActive && !loading && <Dialer mayday={mayday} widget={widget} callString={callString} onDial={this.placeCall} />}
+        {loading &&
+          (
+            <div className={classes.progress}>
+              <CircularProgress size={80} color='accent' />
+            </div>
+          )}
+        {!callActive && !loading &&
+          (
+            <Dialer mayday={mayday}
+              widget={widget}
+              callString={callString}
+              spaceString={spaceString}
+              onDial={this.placeCall} />
+          )}
         <IncomingToast open={incomingCall} onAnswer={this.handleAccept} onIgnore={this.handleIgnore} />
-        {widget? 
-          (<WidgetContainer size="90%" data={{toPersonEmail: callString, startCall: true}}/>)
+        {(widget && callActive) ?
+          (<WidgetContainer size={this.props.widgetSize} onWidgetClose={this.handleHangUp} data={{ toPersonEmail: uriString, spaceId: spaceString, startCall: false }} />)
           :
           (<div className={callActive ? classes.draggable : classes.hidden}>
-          <Draggable>
-            <Paper className={classes.root} elevation={10}>
-              <Video incoming={this.incomingVideoInput} outgoing={this.outgoingVideoInput} fullScreen={this.fullScreenInput}>
-                <VideoControls onAudioMute={this.handleMute}
-                  onVideoMute={this.handleVideoMute}
-                  onEnd={this.handleHangUp}
-                  videoMuted={this.state.callState.videoMuted}
-                  audioMuted={this.state.callState.audioMuted}
-                  videoElement={this.state.videoElement} />
-              </Video>
-            </Paper>
-          </Draggable>
-        </div>)}
+            <Draggable>
+              <Paper className={classes.root} elevation={10}>
+                <Video incoming={this.incomingVideoInput} outgoing={this.outgoingVideoInput} fullScreen={this.fullScreenInput}>
+                  <VideoControls onAudioMute={this.handleMute}
+                    onVideoMute={this.handleVideoMute}
+                    onEnd={this.handleHangUp}
+                    videoMuted={this.state.callState.videoMuted}
+                    audioMuted={this.state.callState.audioMuted}
+                    videoElement={this.state.videoElement} />
+                </Video>
+              </Paper>
+            </Draggable>
+          </div>)}
       </div>
     );
   }

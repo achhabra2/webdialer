@@ -9,11 +9,10 @@ import { Redirect } from 'react-router-dom';
 import prefix from 'react-prefixer';
 
 const containerStyle = prefix({
-  flexDirection: 'column',
-  alignItems: 'baseline',
-  alignContent: 'flex-start',
+  position: 'relative',
   width: '100%',
   textAlign: 'center',
+  margin: 'auto'
 });
 
 @inject('store') @observer
@@ -36,6 +35,7 @@ class LoginPage extends Component {
   }
 
   handleLoginUser = event => {
+    event.preventDefault();
     const { store } = this.props;
     if (!store.authenticated) {
       store.api.authorization
@@ -47,7 +47,7 @@ class LoginPage extends Component {
 
   handleLoginGuest = async (event, options) => {
     const { store } = this.props;
-    const {name, sub} = options;
+    const { name, sub } = options;
     store.setApi();
     this.setState({ loading: true, loadingMessage: 'Fetching JWT' });
     if (!store.authenticated) {
@@ -89,18 +89,18 @@ class LoginPage extends Component {
     const { from } = this.props.location.state;
     const query = from && (from.search ? from.search : undefined);
     return (
-      <Container style={containerStyle}>
-        {(!loading ? <Authenticate handleLoginUser={this.handleLoginUser} handleLoginGuest={this.handleLoginGuest} /> : <Item flex='1 0 75%'> <CircularProgress size={80} color='accent' /> </Item>)}
-        <Item flex='0 0 100%'>
+      <div style={containerStyle}>
+        {(!loading ? <Authenticate handleLoginUser={this.handleLoginUser} handleLoginGuest={this.handleLoginGuest} /> : <div style={{ margin: 'auto' }}> <CircularProgress size={80} color='accent' /> </div>)}
+        <div style={{ textAlign: 'center' }}>
           {loadingMessage}<br />
           Note Guest Access does not work with SIP calls and will not work with roomkit@sparkdemos.com.
-        </Item>
+        </div>
         {this.state.page && this.props.store.authenticated &&
           <Redirect to={{
             pathname: this.state.page,
             search: query
           }} />}
-      </Container>
+      </div>
     )
   }
 }

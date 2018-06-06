@@ -12,7 +12,7 @@ const styles = {
     }
   },
   videoStyle: {
-    width: '100%',
+    width: '90%',
   },
   overlayStyle: {
     'position': 'absolute',

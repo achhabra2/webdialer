@@ -4,7 +4,6 @@ import { Provider } from 'mobx-react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import SparkApp from './components/SparkApp';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
-import { inject, observer } from 'mobx-react';
 import ReactGA from 'react-ga';
 import blue from 'material-ui/colors/blue';
 import cyan from 'material-ui/colors/cyan';

@@ -56,6 +56,7 @@ class CareForm extends PureComponent {
   };
 
   handleClick = event => {
+    event.preventDefault();
     const { dataset } = this.props;
     let error = false;
     for (const field of dataset) {

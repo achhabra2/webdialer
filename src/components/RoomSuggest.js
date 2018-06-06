@@ -1,210 +1,248 @@
-/* eslint-disable flowtype/require-valid-file-annotation */
-/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/prop-types */
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Autosuggest from 'react-autosuggest';
-import TextField from 'material-ui/TextField';
-import Paper from 'material-ui/Paper';
-import { MenuItem } from 'material-ui/Menu';
-import match from 'autosuggest-highlight/match';
-import parse from 'autosuggest-highlight/parse';
 import { withStyles } from 'material-ui/styles';
+import Typography from 'material-ui/Typography';
+import Input from 'material-ui/Input';
+import { MenuItem } from 'material-ui/Menu';
+import ArrowDropDownIcon from 'material-ui-icons/ArrowDropDown';
+import ArrowDropUpIcon from 'material-ui-icons/ArrowDropUp';
+import ClearIcon from 'material-ui-icons/Clear';
+import Chip from 'material-ui/Chip';
+import Select from 'react-select';
+import { inject, observer } from 'mobx-react';
+import 'react-select/dist/react-select.css';
 
-const suggestions = [
-  { label: 'Afghanistan' },
-  { label: 'Aland Islands' },
-  { label: 'Albania' },
-  { label: 'Algeria' },
-  { label: 'American Samoa' },
-  { label: 'Andorra' },
-  { label: 'Angola' },
-  { label: 'Anguilla' },
-  { label: 'Antarctica' },
-  { label: 'Antigua and Barbuda' },
-  { label: 'Argentina' },
-  { label: 'Armenia' },
-  { label: 'Aruba' },
-  { label: 'Australia' },
-  { label: 'Austria' },
-  { label: 'Azerbaijan' },
-  { label: 'Bahamas' },
-  { label: 'Bahrain' },
-  { label: 'Bangladesh' },
-  { label: 'Barbados' },
-  { label: 'Belarus' },
-  { label: 'Belgium' },
-  { label: 'Belize' },
-  { label: 'Benin' },
-  { label: 'Bermuda' },
-  { label: 'Bhutan' },
-  { label: 'Bolivia, Plurinational State of' },
-  { label: 'Bonaire, Sint Eustatius and Saba' },
-  { label: 'Bosnia and Herzegovina' },
-  { label: 'Botswana' },
-  { label: 'Bouvet Island' },
-  { label: 'Brazil' },
-  { label: 'British Indian Ocean Territory' },
-  { label: 'Brunei Darussalam' },
-];
 
-function renderInput(inputProps) {
-  const { classes, autoFocus, value, ref, ...other } = inputProps;
+
+class Option extends React.Component {
+  handleClick = event => {
+    this.props.onSelect(this.props.option, event);
+  };
+
+  render() {
+    const { children, isFocused, isSelected, onFocus } = this.props;
+
+    return (
+      <MenuItem
+        onFocus={onFocus}
+        selected={isFocused}
+        onClick={this.handleClick}
+        component="div"
+        style={{
+          fontWeight: isSelected ? 500 : 400
+        }}
+      >
+        {children}
+      </MenuItem>
+    );
+  }
+}
+
+function SelectWrapped(props) {
+  const { classes, ...other } = props;
 
   return (
-    <TextField
-      autoFocus={autoFocus}
-      className={classes.textField}
-      value={value}
-      inputRef={ref}
-      InputProps={{
-        classes: {
-          input: classes.input,
-        },
-        ...other,
+    <Select
+      optionComponent={Option}
+      noResultsText={<Typography>{'No results found'}</Typography>}
+      arrowRenderer={arrowProps => {
+        return arrowProps.isOpen ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />;
       }}
+      clearRenderer={() => <ClearIcon />}
+      valueComponent={valueProps => {
+        const { value, children, onRemove } = valueProps;
+
+        if (onRemove) {
+          return (
+            <Chip
+              tabIndex={-1}
+              label={children}
+              className={classes.chip}
+              onDelete={event => {
+                event.preventDefault();
+                event.stopPropagation();
+                onRemove(value);
+              }}
+            />
+          );
+        }
+
+        return <div className="Select-value">{children}</div>;
+      }}
+      {...other}
     />
   );
 }
 
-function renderSuggestion(suggestion, { query, isHighlighted }) {
-  const matches = match(suggestion.label, query);
-  const parts = parse(suggestion.label, matches);
-
-  return (
-    <MenuItem selected={isHighlighted} component="div">
-      <div>
-        {parts.map((part, index) => {
-          return part.highlight ? (
-            <span key={index} style={{ fontWeight: 300 }}>
-              {part.text}
-            </span>
-          ) : (
-            <strong key={index} style={{ fontWeight: 500 }}>
-              {part.text}
-            </strong>
-          );
-        })}
-      </div>
-    </MenuItem>
-  );
-}
-
-function renderSuggestionsContainer(options) {
-  const { containerProps, children } = options;
-
-  return (
-    <Paper {...containerProps} square>
-      {children}
-    </Paper>
-  );
-}
-
-function getSuggestionValue(suggestion) {
-  return suggestion.label;
-}
-
-function getSuggestions(value) {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
-  let count = 0;
-
-  return inputLength === 0
-    ? []
-    : suggestions.filter(suggestion => {
-        const keep =
-          count < 5 && suggestion.label.toLowerCase().slice(0, inputLength) === inputValue;
-
-        if (keep) {
-          count += 1;
-        }
-
-        return keep;
-      });
-}
+const ITEM_HEIGHT = 48;
 
 const styles = theme => ({
-  container: {
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 180,
+  },
+  root: {
     flexGrow: 1,
-    position: 'relative',
     height: 200,
+    width: 200,
   },
-  suggestionsContainerOpen: {
-    position: 'absolute',
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit * 3,
-    left: 0,
-    right: 0,
+  chip: {
+    margin: theme.spacing.unit / 4,
   },
-  suggestion: {
-    display: 'block',
-  },
-  suggestionsList: {
-    margin: 0,
-    padding: 0,
-    listStyleType: 'none',
-  },
-  textField: {
-    width: '100%',
+  // We had to use a lot of global selectors in order to style react-select.
+  // We are waiting on https://github.com/JedWatson/react-select/issues/1679
+  // to provide a better implementation.
+  // Also, we had to reset the default style injected by the library.
+  '@global': {
+    '.Select-control': {
+      display: 'flex',
+      alignItems: 'center',
+      border: 0,
+      height: 'auto',
+      background: 'transparent',
+      '&:hover': {
+        boxShadow: 'none',
+      },
+    },
+    '.Select-multi-value-wrapper': {
+      flexGrow: 1,
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    '.Select--multi .Select-input': {
+      margin: 0,
+    },
+    '.Select.has-value.is-clearable.Select--single > .Select-control .Select-value': {
+      padding: 0,
+    },
+    '.Select-noresults': {
+      padding: theme.spacing.unit * 2,
+    },
+    '.Select-input': {
+      display: 'inline-flex !important',
+      padding: 0,
+      height: 'auto',
+    },
+    '.Select-input input': {
+      background: 'transparent',
+      border: 0,
+      padding: 0,
+      cursor: 'default',
+      display: 'inline-block',
+      fontFamily: 'inherit',
+      fontSize: 'inherit',
+      margin: 0,
+      outline: 0,
+    },
+    '.Select-placeholder, .Select--single .Select-value': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      display: 'flex',
+      alignItems: 'center',
+      fontFamily: theme.typography.fontFamily,
+      fontSize: theme.typography.pxToRem(16),
+      padding: 0,
+    },
+    '.Select-placeholder': {
+      opacity: 0.42,
+      color: theme.palette.common.black,
+    },
+    '.Select-menu-outer': {
+      backgroundColor: theme.palette.background.paper,
+      boxShadow: theme.shadows[2],
+      position: 'absolute',
+      left: 0,
+      top: `calc(100% + ${theme.spacing.unit}px)`,
+      width: '100%',
+      zIndex: 2,
+      maxHeight: ITEM_HEIGHT * 4.5,
+    },
+    '.Select.is-focused:not(.is-open) > .Select-control': {
+      boxShadow: 'none',
+    },
+    '.Select-menu': {
+      maxHeight: ITEM_HEIGHT * 4.5,
+      overflowY: 'auto',
+    },
+    '.Select-menu div': {
+      boxSizing: 'content-box',
+    },
+    '.Select-arrow-zone, .Select-clear-zone': {
+      color: theme.palette.action.active,
+      cursor: 'pointer',
+      height: 21,
+      width: 21,
+      zIndex: 1,
+    },
+    // Only for screen readers. We can't use display none.
+    '.Select-aria-only': {
+      position: 'absolute',
+      overflow: 'hidden',
+      clip: 'rect(0 0 0 0)',
+      height: 1,
+      width: 1,
+      margin: -1,
+    },
   },
 });
 
-class IntegrationAutosuggest extends React.Component {
+@inject('store') @observer
+class IntegrationReactSelect extends React.Component {
   state = {
-    value: '',
-    suggestions: [],
+    single: null,
+    suggestions: []
   };
 
-  handleSuggestionsFetchRequested = ({ value }) => {
+  handleChangeSingle = single => {
     this.setState({
-      suggestions: getSuggestions(value),
+      single,
     });
+    const event = {
+      target: {
+        value: single
+      }
+    };
+    this.props.onChange(event);
   };
 
-  handleSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: [],
-    });
-  };
-
-  handleChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue,
-    });
-  };
+  async componentWillMount() {
+    const spaceList = await this.props.store.api.rooms.list({max: 99});
+    const suggestions = spaceList.items.map(item => ({label: item.title, value: item.id}));
+    this.setState({suggestions});
+  }
 
   render() {
     const { classes } = this.props;
+    const { single, suggestions } = this.state;
 
     return (
-      <Autosuggest
-        theme={{
-          container: classes.container,
-          suggestionsContainerOpen: classes.suggestionsContainerOpen,
-          suggestionsList: classes.suggestionsList,
-          suggestion: classes.suggestion,
-        }}
-        renderInputComponent={renderInput}
-        suggestions={this.state.suggestions}
-        onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
-        renderSuggestionsContainer={renderSuggestionsContainer}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
+      <Input
+        fullWidth
+        className={classes.formControl}
+        inputComponent={SelectWrapped}
         inputProps={{
-          autoFocus: true,
           classes,
-          placeholder: 'Search a country (start with a)',
-          value: this.state.value,
-          onChange: this.handleChange,
+          value: single,
+          onChange: this.handleChangeSingle,
+          placeholder: 'Select Space',
+          instanceId: 'react-select-single',
+          id: 'react-select-single',
+          name: 'react-select-single',
+          simpleValue: true,
+          options: suggestions,
         }}
       />
     );
   }
 }
 
-IntegrationAutosuggest.propTypes = {
-  classes: PropTypes.object.isRequired,
+IntegrationReactSelect.propTypes = {
+  classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(IntegrationAutosuggest);
+export default withStyles(styles)(IntegrationReactSelect);

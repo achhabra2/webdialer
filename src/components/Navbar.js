@@ -6,6 +6,7 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import { Link } from 'react-router-dom'
+import MyDetails from './MyDetails';
 
 const styles = theme => ({
   root: {
@@ -16,16 +17,27 @@ const styles = theme => ({
 
 class SimpleAppBar extends React.PureComponent {
 
+  state = {
+    detailOpen: false
+  }
+
   checkSelected = (text) => {
     if (text) {
-      if (text === 'call' || text === 'custom' || text === 'about' || text === 'care')
+      if (text === 'call' || text === 'custom' || text === 'about' || text === 'care' || text==='cleu')
         return text;
     } else return false;
   }
 
+  handleDetailOpen = event => {
+    this.setState({detailOpen: !this.state.detailOpen})
+  }
+
   renderTab() {
     if (this.props.authenticated) {
-      return <Tab value='account' label={this.props.user ? this.props.user.displayName : 'User'} />
+      return <Tab 
+        value='account' 
+        label={this.props.user ? this.props.user.displayName : 'User'}
+        onClick={this.handleDetailOpen} />
     } else {
       return <Tab value='login' label="Login" />
     }
@@ -41,15 +53,17 @@ class SimpleAppBar extends React.PureComponent {
             <Typography align='center' type="title" color="inherit">
               Spark Web Dialer
           </Typography>
-            <Tabs scrollable={false} centered value={this.checkSelected(path)} fullWidth={true}>
+            <Tabs scrollable scrollButtons="auto" value={this.checkSelected(path)} fullWidth>
               {this.renderTab()}
               <Tab value='call' label="Dialer" component={Link} to='/call' />
-              <Tab value='custom' label="Custom Demo" component={Link} to='/custom' />
-              <Tab value='care' label="Care Demo" component={Link} to='/care' />
+              <Tab value='custom' label="Custom Branding" component={Link} to='/custom' />
+              <Tab value='care' label="Kiosk Demo" component={Link} to='/care' />
+              <Tab value='cleu' label="Sample Site" component={Link} to='/cleu' />
               <Tab value='about' label="About" component={Link} to='/about' />
             </Tabs>
           </Toolbar>
         </AppBar>
+        {this.state.detailOpen && <MyDetails details={this.props.user} />}
       </div>
     );
   }
