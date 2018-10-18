@@ -8,7 +8,7 @@ process.env.NODE_ENV == 'production'
 
 let redirectUri = '&redirect_uri=' + encodeURIComponent(public_address);
 
-let authUrl = `https://api.ciscospark.com/v1/authorize?client_id=C6db8b9e03171d990182af1fefe345c04e732957f0ff1f3385be65bdf6d3a144b&response_type=code&scope=spark%3Aall%20spark%3Akms${redirectUri}`;
+let authUrl = `https://api.ciscospark.com/v1/authorize?client_id=Cffb661b2ce9b656804f49494a74ada2f94ba4baf81092de1bc643177cee01311&response_type=code&scope=spark%3Aall%20spark%3Akms${redirectUri}`;
 
 class Store {
   @observable authenticated = false;
