@@ -2,7 +2,9 @@ import { observable, computed, action } from 'mobx';
 import Spark from 'ciscospark';
 
 let public_address;
-process.env.NODE_ENV == 'production' ? public_address = `https://${window.location.host}/auth` : public_address = 'http://localhost:3000/auth';
+process.env.NODE_ENV == 'production'
+  ? (public_address = `https://${window.location.host}/auth`)
+  : (public_address = 'http://localhost:3000/auth');
 
 let redirectUri = '&redirect_uri=' + encodeURIComponent(public_address);
 
@@ -22,7 +24,7 @@ class Store {
           authorizationString: authUrl
         },
         phone: {
-          enableExperimentalGroupCallingSupport: true
+          enableExperimentalGroupCallingSupport: false
         }
       }
     });
@@ -32,52 +34,55 @@ class Store {
         this.authenticated = true;
         try {
           this.user = await this.api.people.get('me');
-        }
-        catch (error) {
-          this.user = {}
+        } catch (error) {
+          this.user = {};
         }
       }
     });
   }
 
-  @action async setAuth() {
+  @action
+  async setAuth() {
     this.authenticated = this.api.canAuthorize;
     if (this.authenticated) {
       try {
         this.user = await this.api.people.get('me');
-      }
-      catch (error) {
-        this.user = {}
+      } catch (error) {
+        this.user = {};
       }
     }
   }
 
-  @action setApi = () => {
+  @action
+  setApi = () => {
     this.api = Spark.init({
       config: {
         phone: {
-          enableExperimentalGroupCallingSupport: true
+          enableExperimentalGroupCallingSupport: false
         }
       }
     });
-  }
+  };
 
-  @action setBanner(url) {
+  @action
+  setBanner(url) {
     this.navbarImage = url;
   }
 
-  @action setNavbarHidden = (bool) => {
+  @action
+  setNavbarHidden = bool => {
     this.navbarHidden = bool;
-  }
+  };
 
-  @action setLastPage = (lastPage) => {
+  @action
+  setLastPage = lastPage => {
     this.lastPage = lastPage;
-  }
+  };
 
-  @action setRedirectState = (state) => {
+  @action
+  setRedirectState = state => {
     this.redirectState = state;
-  }
-
+  };
 }
 
 export default Store;
